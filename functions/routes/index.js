@@ -109,14 +109,14 @@ router.post("/register",function(req,res){
        // console.log(user)
         // define database
     var refdb=db.ref().child("Users");
-    // get clientid and append cleint information
-    var clientId=firebase.auth().currentUser.uid;
+    // get userid and append user information
+    var userid=firebase.auth().currentUser.uid;
    
-     var clientRef=refdb.child(clientId);
-     // console.log(clientRef);
-    var clientData = {firstname:firstname, lastname:lastname};
+     var userRef=refdb.child(userid);
+    
+    var userData = {firstname:firstname, lastname:lastname};
    
-       clientRef.set(clientData,function(error,user){
+       userRef.set(userData,function(error,user){
         if(error){
              var errorMessage = error.message;
             // req.flash("error",errorMessage);

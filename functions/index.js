@@ -23,15 +23,16 @@ const functions = require('firebase-functions'),
            //Error Code Page
      app.get("/blank",isAuthenticated,function(req,res){
         //Get Current UserID
-        //  var userid = firebase.auth().currentUser.uid;
-         var userRef=db.ref("/Users/"+'CYFfFMSnffRuE9nJzbwogTza2523'+"/DTC/DTC Code");
+          var userid = firebase.auth().currentUser.uid;
+          console.log(userid);
+         var userRef=db.ref("/Users/"+userid+"/DTC/DTC Code");
          userRef.on("value",function(snapshot){
-       var data=JSON.stringify(snapshot.val)
-       var testData = snapshot.val()
-       testData = testData.substr(2,testData.length - 4)
-       testData = testData.split('), (')
-       var testDTC = testData[0].split(', ')
-         res.render("blank",{ code_num:testDTC[0], data:testDTC[1] });
+          var data=JSON.stringify(snapshot.val)
+          var testData = snapshot.val()
+          testData = testData.substr(2,testData.length - 4)
+          testData = testData.split('), (')
+          var testDTC = testData[0].split(', ')
+            res.render("blank",{ code_num:testDTC[0], data:testDTC[1] });
              
             })
    });
@@ -43,6 +44,9 @@ const functions = require('firebase-functions'),
         })
         app.get('/carmd',isAuthenticated,function(req,res){
             res.render('carmd');
+        })
+        app.get('/telemetry',function(req,res){
+            res.render('telemetry');
         })
         app.get('/tables',function(req,res){
             res.render('tables');
