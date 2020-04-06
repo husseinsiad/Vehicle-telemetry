@@ -2,32 +2,27 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "serve": "firebase serve --only functions",
+    "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "dependencies": {
-    "ejs": "^3.0.1",
-    "express": "^4.17.1",
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "datatables.net-bs4": "^1.10.19",
+    "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "method-override": "^3.0.0",
-    "firebase": "^7.2.2",
+    "firebase": "^7.13.2",
     "firebase-admin": "^8.6.0",
     "firebase-functions": "^3.3.0",
-    "@fortawesome/fontawesome-free": "5.9.0",
-        "bootstrap": "4.3.1",
-        "chart.js": "2.8.0",
-        "datatables.net-bs4": "1.10.19",
-        "jquery": "3.4.1",
-        "jquery.easing": "^1.4.1"
-
+    "jquery": "^3.4.1",
+    "jquery.easing": "^1.4.1"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.1.6",
@@ -41,8 +36,9 @@
     "gulp-rename": "1.4.0",
     "gulp-sass": "4.0.2",
     "gulp-uglify": "3.0.2",
-    "merge-stream": "2.0.0"
-
+    "merge-stream": "2.0.0",
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1"
   },
   "private": true
 }
