@@ -5,192 +5,198 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
  
 $(document).ready(function() {
 
-	  var user_Id="TG0lqZKsT1S4RY6G71rzMGmuYgw2";
-		var db = firebase.database();
-		var Trip4Ref = db.ref('/Users/TG0lqZKsT1S4RY6G71rzMGmuYgw2/TripData/Trip4/');
-		// var userRef = db.child('Users').child('TG0lqZKsT1S4RY6G71rzMGmuYgw2').child('TripData')
-		// .child('Trip1').child('Time100');
-		// alert(Trip4Ref);
-		var totalFinalRpm=0.0;
-		var totalSpeed;
-		var totalFinalTime=0.0;
-		var totalFuelLevel;
-		var time;
-		var rpm;
-		var finalTime;
-		var finalRpm;
-
-		// Trip4Ref.on('value', function(snapshot) {
-		// var data = JSON.stringify(snapshot.val);
-		// snapshot.forEach(function(childNodes){
-		// 	 childNodes.key;
-		//      childNodes.val();
-		// 	//  console.log(childNodes.key);
-		// 	// totalSpeed=totalRpm+childNodes.val().Speed;
-		// 	 time=childNodes.val().Time;
-		// 	 var index = time.indexOf(" ");  // Gets the first index where a space occours
-		// 	finalTime = parseFloat(time.substr(0, index)); // Gets the first part
-		// 	rpm=childNodes.val().RPM;
-		// 	finalRpm = parseFloat(rpm.substr(0, index)); // Gets the first part
-		// 	console.log(finalTime);
-		// 	console.log(finalRpm);
-		// 	totalFinalTime += finalTime;
-		// 	totalFinalRpm += finalRpm;
-
-		// })
-		// console.log("Time:" +parseFloat(totalFinalTime).toFixed(2));
-		// console.log("RPM:" +parseFloat(totalFinalRpm).toFixed(2));
+});
  
 
-		var ctx = document.getElementById('myBarChart');
-		var myLineChart = new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: [ 'Trip 1', 'Trip 2', 'Trip 3', 'Trip 4', 'Trip 5', 'Trip 6' ],
-				datasets: [
-					{
-						label: 'Total:',
-						backgroundColor: 'rgba(2,117,216,1)',
-						borderColor: 'rgba(2,117,216,1)',
-						data: [parseFloat(totalFinalRpm).toFixed(2), 5312, 6251, 7841, 9821, 14984 ]
-					}
-				]
-			},
-			options: {
-				scales: {
-					xAxes: [
-						{
-							time: {
-								unit: 'month'
-							},
-							gridLines: {
-								display: false
-							},
-							ticks: {
-								maxTicksLimit: 6
-							}
-						}
-					],
-					yAxes: [
-						{
-							ticks: {
-								min: 0,
-								max: 15000,
-								maxTicksLimit: 5
-							},
-							gridLines: {
-								display: true
-							}
-						}
-					]
-				},
-				legend: {
-					display: false
-				}
-			}
-		});
-	});
-// });
-
-
-$('#btn-trip1-6').click(function(event) {
-	var user_Id="TG0lqZKsT1S4RY6G71rzMGmuYgw2";
+$('#btnTripSpeed.dropdown-item').on('click', function() {
 	var db = firebase.database();
-	var Trip4Ref = db.ref('/Users/TG0lqZKsT1S4RY6G71rzMGmuYgw2/TripData/Trip4/');
- 
-		var totalFinalRpm=0.0;
-		var totalSpeed;
-		var totalFinalTime=0.0;
-		var totalFuelLevel;
-		var time;
-		var rpm;
-		var finalTime;
-        var finalRpm;
-    
-		Trip4Ref.on('value', function(snapshot) {
-			snapshot.forEach(function(childNodes){
-			  childNodes.key;
-				childNodes.val();
-			 //  console.log(childNodes.key);
-			 // totalSpeed=totalRpm+childNodes.val().Speed;
-			  time=childNodes.val().Time;
-			  var index = time.indexOf(" ");  // Gets the first index where a space occours
-			 finalTime = parseFloat(time.substr(0, index)); // Gets the first part
-			 rpm=childNodes.val().RPM;
-			 finalRpm = parseFloat(rpm.substr(0, index)); // Gets the first part
-			 console.log(finalTime);
-			 console.log(finalRpm);
-			 totalFinalTime += finalTime;
-			 totalFinalRpm += finalRpm;
-	   
-		   })
-	  
-		   console.log("Time:" +parseFloat(totalFinalTime).toFixed(2));
-		  console.log("RPM:" +parseFloat(totalFinalRpm).toFixed(2));
-		var ctx = document.getElementById('myBarChart');
-		var myLineChart = new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: [ 'Trip 11', 'Trip 2', 'Trip 3', 'Trip 4', 'Trip 5', 'Trip 6' ],
-				datasets: [
-					{
-						label: 'Total:',
-						backgroundColor: 'rgba(2,117,216,1)',
-						borderColor: 'rgba(2,117,216,1)',
-						data: [ 4215, 5312, 6251, 7841, 9821, 14984 ]
-					}
-				]
-			},
-			options: {
-				scales: {
-					xAxes: [
-						{
-							time: {
-								unit: 'month'
-							},
-							gridLines: {
-								display: false
-							},
-							ticks: {
-								maxTicksLimit: 6
-							}
-						}
-					],
-					yAxes: [
-						{
-							ticks: {
-								min: 0,
-								max: 15000,
-								maxTicksLimit: 5
-							},
-							gridLines: {
-								display: true
-							}
-						}
-					]
-				},
-				legend: {
-					display: false
-				}
-			}
+	var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
+		var tripDateList=[];
+		var sumSpeed=0;
+	tripDateRef.on("value", function(snap) {
+		snap.forEach(function(childNodes){
+			tripDateList.push(childNodes.key);
+		})
+		//outer loop it loops until trip ends
+		var aveSpeedList=[];
+		var aveRpmList=[];
+		
+		for(var i=0;i<tripDateList.length;i++){
+			var sumSpeed=0;
+		    var sumRpm=0;
+			var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripDateList[i]); 
+			tripDateRef.on('value',function(snap){
+				//Inner loop calculating average
+			  snap.forEach(function(childNodes){
+				var speed=childNodes.val().SPEED;
+				var rpm=childNodes.val().RPM;
+				var i = speed.indexOf(" ");  // Gets the first index where a space occours
+				var i = rpm.indexOf(" ");  // Gets the first index where a space occours
+				sumSpeed = sumSpeed + parseInt(speed.substr(0, i)) || 0;
+				// console.log("Speed " +speed +" "+ childNodes.key);
+				sumRpm = sumRpm + parseInt(rpm.substr(0, i));
+				// console.log("RPM " +rpm +" "+ childNodes.key);
+			  })
+			//   let finalSumSpeed=Math.round(sumSpeed / snap.numChildren());
+			  aveSpeedList.push(Math.round(sumSpeed / snap.numChildren()));
+			  aveRpmList.push(Math.round(sumRpm / snap.numChildren()));
+			//   console.log("Number off "+snap.numChildren())
+			//   console.log("Average Speed "+aveSpeedList)
+			//   console.log("Average RPM "+aveRpmList)
+			});//end snapshot
+			 
+		}
+
+	
+		  
+		  var ctx = document.getElementById('myBarChart');
+	  var myLineChart = new Chart(ctx, {
+		  type: 'bar',
+		  data: {
+			  labels: tripDateList,
+			  datasets: [
+				  {
+					  label: 'Total:',
+					  backgroundColor: 'rgba(2,117,216,1)',
+					  borderColor: 'rgba(2,117,216,1)',
+					  data: aveSpeedList
+				  }
+			  ]
+		  },
+		  options: {
+			  scales: {
+				  xAxes: [
+					  {
+						  time: {
+							  unit: 'month'
+						  },
+						  gridLines: {
+							  display: false
+						  },
+						  ticks: {
+							  maxTicksLimit: 6
+						  }
+					  }
+				  ],
+				  yAxes: [
+					  {
+						  ticks: {
+							  min: 0,
+							  max: 100,
+							  maxTicksLimit: 5
+						  },
+						  gridLines: {
+							  display: true
+						  }
+					  }
+				  ]
+			  },
+			  legend: {
+				  display: false
+			  }
+		  }
+	//   });
+
+		})
+	// } // end loop
+		 
 		});
-	});
+
 });
 
-// $(".dropdown-menu li a").click(function(){
-// 	var parent = $(this).parents(".dropdown").find('.btn btn-light border solid dropdown-toggle');
-// 	parent.text($(this).text().trim());
-// 	parent.val($(this).data('value'));
-// 	alert(parent.val($(this).data('value')));
-// 	console.log(parent.text($(this).text().trim()))
-// });
 
-$("a#btnTripDate.dropdown-item").click(function(){
-	 var trip=$(this).text();
-	// var parent = $(this).parents(".dropdown").find('.btn btn-light border solid dropdown-toggle');
-	// parent.text($(this).text().trim());
-	// parent.val($(this).data('value'));
-	// alert(parent.val($(this).data('value')));
-	// console.log(parent.text($(this).innerText()));
-	console.log(trip);
+$('#btnTripRpm.dropdown-item').on('click', function() {
+	var db = firebase.database();
+	var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
+		var tripDateList=[];
+		var sumSpeed=0;
+	tripDateRef.on("value", function(snap) {
+		snap.forEach(function(childNodes){
+			tripDateList.push(childNodes.key);
+		})
+		//outer loop it loops until trip ends
+		// var aveSpeedList=[];
+		var aveRpmList=[];
+		
+		for(var i=0;i<tripDateList.length;i++){
+			// var sumSpeed=0;
+		    var sumRpm=0;
+			var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripDateList[i]); 
+			tripDateRef.on('value',function(snap){
+				//Inner loop calculating average
+			  snap.forEach(function(childNodes){
+				// var speed=childNodes.val().SPEED;
+				var rpm=childNodes.val().RPM;
+				// var i = speed.indexOf(" ");  // Gets the first index where a space occours
+				var i = rpm.indexOf(" ");  // Gets the first index where a space occours
+				// sumSpeed = sumSpeed + parseInt(speed.substr(0, i)) || 0;
+				// console.log("Speed " +speed +" "+ childNodes.key);
+				sumRpm = sumRpm + parseInt(rpm.substr(0, i)) || 0;
+				// console.log("RPM " +rpm +" "+ childNodes.key);
+			  })
+			//   let finalSumSpeed=Math.round(sumSpeed / snap.numChildren());
+			//   aveSpeedList.push(Math.round(sumSpeed / snap.numChildren()));
+			  aveRpmList.push(Math.round(sumRpm / snap.numChildren()));
+			//   console.log("Number off "+snap.numChildren())
+			//   console.log("Average Speed "+aveSpeedList)
+			//   console.log("Average RPM "+aveRpmList)
+			});//end snapshot
+			 
+		}
+
+	
+		  
+		  var ctx = document.getElementById('myBarChart');
+	  var myLineChart = new Chart(ctx, {
+		  type: 'bar',
+		  data: {
+			  labels: tripDateList,
+			  datasets: [
+				  {
+					  label: 'Total:',
+					  backgroundColor: 'rgba(2,117,216,1)',
+					  borderColor: 'rgba(2,117,216,1)',
+					  data: aveRpmList
+				  }
+			  ]
+		  },
+		  options: {
+			  scales: {
+				  xAxes: [
+					  {
+						  time: {
+							  unit: 'month'
+						  },
+						  gridLines: {
+							  display: false
+						  },
+						  ticks: {
+							  maxTicksLimit: 6
+						  }
+					  }
+				  ],
+				  yAxes: [
+					  {
+						  ticks: {
+							  min: 0,
+							  max: 8000,
+							  maxTicksLimit: 5
+						  },
+						  gridLines: {
+							  display: true
+						  }
+					  }
+				  ]
+			  },
+			  legend: {
+				  display: false
+			  }
+		  }
+	//   });
+
+		})
+	// } // end loop
+		 
+		});
+
 });

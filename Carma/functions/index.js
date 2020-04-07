@@ -8,9 +8,10 @@ const functions = require('firebase-functions'),
 var db = admin.database();
 var app = express();
 app.use(bodyparser.urlencoded({ extended: true }));
+app.use(indexRouter);
 // app.use(methodoverride('_method'));
 app.use('/static', express.static('./static/'));
-app.use(indexRouter);
+
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.get('/', function(req, res) {

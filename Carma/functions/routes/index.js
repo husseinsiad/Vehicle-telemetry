@@ -186,5 +186,6 @@ router.post('/forgot-password', function(req, res) {
 			res.render('forgot-password', { error: errorMessage });
 		});
 });
+ 
 
 module.exports = router;

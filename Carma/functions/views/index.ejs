@@ -20,6 +20,8 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 
+  
+
 </head>
 
 <body id="page-top">
@@ -137,108 +139,79 @@
           <div class="card-header">
             <i class="fas fa-chart-area"></i>
             Trip Data
-            <div class="btn-group">
-              <button type="button"class="btn btn-light border solid ">Select TripDate</button>
-              <button type="button"   class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <div class="tripDate">
+             
+            <div class="btn-group"> 
+
+              <select class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" id="selectTripDate">
+                <option data-tokens="frosting">Select TripDate</option>
                 <% if(tripData && tripData.length>0){%>
                   <% for(var i=0; i < tripData.length; i++) { %>
-                    <button class="dropdown-item" id="btnTripDate"><%= tripData[i] %></button>
+                    <option class="dropdown-item" id="btnTripDate"><%= tripData[i] %></option>
+                     
                <% } %>
               <%}%>
+              </select>
             </div>
-                
-                
+            <div class="btn-group"> 
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="speedCheckBox">
+                <label class="custom-control-label" for="speedCheckBox">Speed</label>
+                <div id="result" style="background: yellow;"></div> 
               </div>
             </div>
+            
+            <div class="btn-group"> 
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="rpmCheckBox">
+                <label class="custom-control-label" for="rpmCheckBox">RPM</label>
+                <div id="results" style="background: yellow;"></div> 
+              </div>
+            </div>    
 
-            <div class="btn-group">
-              <button type="button"class="btn btn-light border solid ">Speed</button>
-              <button type="button"  id="btn-speed" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <% for(var i=0; i < tripData.length; i++) { %>
-                    <button class="dropdown-item" id="btnSpeed"><%= tripData[i] %></button>
-               <% } %>
-                
+            <div class="btn-group"> 
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="outsideCheckBox">
+                <label class="custom-control-label" for="outsideCheckBox">Outside Temp</label>
+                <div id="results" style="background: yellow;"></div> 
               </div>
-            </div>
-            <div class="btn-group">
-              <button type="button"class="btn btn-light border solid ">RPM</button>
-              <button type="button"  id="btn-rpm" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <% for(var i=0; i < tripData.length; i++) { %>
-                    <button class="dropdown-item" id="btnRpm"><%= tripData[i] %></button>
-               <% } %>
-                
+            </div>   
+            <div class="btn-group"> 
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="tspCheckBox">
+                <label class="custom-control-label" for="tspCheckBox">Throttle Position</label>
+                <div id="results" style="background: yellow;"></div> 
               </div>
-            </div>
-            <div class="btn-group">
-              <button type="button"class="btn btn-light border solid ">Outside Temp</button>
-              <button type="button"  id="btn-speed" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <% for(var i=0; i < tripData.length; i++) { %>
-                    <button class="dropdown-item" id="btnOutsideTemp"><%= tripData[i] %></button>
-               <% } %>
-                
+        
+            </div>  
+
+            <div class="btn-group"> 
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="fuelLevelCheckBox">
+                <label class="custom-control-label" for="fuelLevelCheckBox">Fuel Level</label>
+                <div id="results" style="background: yellow;"></div> 
               </div>
-            </div>
-            <div class="btn-group">
-              <button type="button"class="btn btn-light border solid ">Throttle position%</button>
-              <button type="button"  id="btn-speed" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <% for(var i=0; i < tripData.length; i++) { %>
-                    <button class="dropdown-item" id="btnThrottle_position"><%= tripData[i] %></button>
-               <% } %>
-                
+        
+            </div> 
+
+            <div class="btn-group"> 
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="engineTemCheckBox">
+                <label class="custom-control-label" for="engineTemCheckBox">Engine Temp</label>
+                <div id="results" style="background: yellow;"></div> 
               </div>
-            </div>
-            <div class="btn-group">
-              <button type="button"class="btn btn-light border solid ">Fuel level%</button>
-              <button type="button"  id="btn-speed" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <% for(var i=0; i < tripData.length; i++) { %>
-                    <button class="dropdown-item" id="btnFuelLevel"><%= tripData[i] %></button>
-               <% } %>
-                
+        
+            </div> 
+            
+            <div class="btn-group"> 
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="engineLoadCheckBox">
+                <label class="custom-control-label" for="engineLoadCheckBox">Engine Load</label>
+                <div id="results" style="background: yellow;"></div> 
               </div>
-            </div>
+        
+            </div> 
            
-            <div class="btn-group">
-              <button type="button"class="btn btn-light border solid ">Engine temperature</button>
-              <button type="button"  id="btn-speed" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <% for(var i=0; i < tripData.length; i++) { %>
-                    <button class="dropdown-item" id="btnEngineTemp"><%= tripData[i] %></button>
-               <% } %>
-                
-              </div>
-            </div>
-            <div class="btn-group">
-              <button type="button"class="btn btn-light border solid ">Engine Load</button>
-              <button type="button"  id="btn-engineLoad" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <% for(var i=0; i < tripData.length; i++) { %>
-                    <button class="dropdown-item" id="btnEngineLoad"><%= tripData[i] %></button>
-               <% } %>
-                
-              </div>
+             
             </div>
             
           </div>
@@ -255,17 +228,18 @@
                 <i class="fas fa-chart-bar"> </i>
                Trip Data
                <div class="btn-group">
-                <button type="button"class="btn btn-light border solid ">Select TripDate </button>
+                <button type="button"class="btn btn-light border solid ">Average off% </button>
                 <button type="button"  id="btn-tripDate" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu">
-
-                  <% for(var i=0; i < tripData.length; i++) { %>
-                    <li><a class="dropdown-item" id="btnTripDate"><%= tripData[i] %> </a></li>
-                     
-                 <% } %>
-                  
+                    <li><a class="dropdown-item" id="btnTripSpeed">Speed</a></li>
+                    <li><a class="dropdown-item" id="btnTripRpm">RPM</a></li>
+                    <!-- <li><a class="dropdown-item" id="btnTripOutsideTemp">Outside Temp</a></li>
+                    <li><a class="dropdown-item" id="btnTripTsp">Throttle Position</a></li>
+                    <li><a class="dropdown-item" id="btnTripFuelLevel">Fuel Level</a></li>
+                    <li><a class="dropdown-item" id="btnTripEngineTemp">Engine Temp</a></li>
+                    <li><a class="dropdown-item" id="btnTripEngineLoad">Engine Load</a></li> -->
                   </ul>
               </div>
               </div>
@@ -344,6 +318,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin.min.js"></script>
+   
 
   <!-- Demo scripts for this page-->
   <script src="static/area-chart.js"></script>
