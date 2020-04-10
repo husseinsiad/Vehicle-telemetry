@@ -19,6 +19,13 @@ firebase.initializeApp(firebaseConfig);
  
   $('#speedCheckBox').click(function(){
       if($(this).is(":checked")){
+        $("#rpmCheckBox").attr("disabled", true);
+        $("#outsideCheckBox").attr("disabled", true);
+        $("#tspCheckBox").attr("disabled", true);
+        $("#fuelLevelCheckBox").attr("disabled", true);
+        $("#engineTemCheckBox").attr("disabled", true);
+        $("#engineLoadCheckBox").attr("disabled", true);
+        
         // window.onload = function () {
         //   var ctx = document.getElementById('myAreaChart');
         //   var context = ctx.getContext('2d');
@@ -112,7 +119,12 @@ firebase.initializeApp(firebaseConfig);
           })
       }
       else if($(this).is(":not(:checked)")){
-         
+        $("#rpmCheckBox").attr("disabled", false);
+        $("#outsideCheckBox").attr("disabled", false);
+        $("#tspCheckBox").attr("disabled", false);
+        $("#fuelLevelCheckBox").attr("disabled", false);
+        $("#engineTemCheckBox").attr("disabled", false);
+        $("#engineLoadCheckBox").attr("disabled", false);
           var ctx = document.getElementById("myAreaChart");
           var myLineChart = new Chart(ctx,{
             type: 'line',
@@ -173,7 +185,13 @@ firebase.initializeApp(firebaseConfig);
 
   $('#rpmCheckBox').click(function(){
     if($(this).is(":checked")){
-        
+        $("#speedCheckBox").attr("disabled", true);
+        $("#outsideCheckBox").attr("disabled", true);
+        $("#tspCheckBox").attr("disabled", true);
+        $("#fuelLevelCheckBox").attr("disabled", true);
+        $("#engineTemCheckBox").attr("disabled", true);
+        $("#engineLoadCheckBox").attr("disabled", true);
+    
       var tripdate=$("#selectTripDate").val();
       // var tripDateValue= $(this).text();
   var db = firebase.database();
@@ -249,7 +267,12 @@ firebase.initializeApp(firebaseConfig);
         // $("#results").html(tripdate);
     }
     else if($(this).is(":not(:checked)")){
-     
+      $("#speedCheckBox").attr("disabled", false);
+      $("#outsideCheckBox").attr("disabled", false);
+      $("#tspCheckBox").attr("disabled", false);
+      $("#fuelLevelCheckBox").attr("disabled", false);
+      $("#engineTemCheckBox").attr("disabled", false);
+      $("#engineLoadCheckBox").attr("disabled", false);
       var ctx = document.getElementById("myAreaChart");
              var myLineChart = new Chart(ctx,{
                type: 'line',
@@ -307,6 +330,13 @@ firebase.initializeApp(firebaseConfig);
 
 $('#outsideCheckBox').click(function(){
   if($(this).is(":checked")){
+    $("#speedCheckBox").attr("disabled", true);
+    $("#tspCheckBox").attr("disabled", true);
+    $("#fuelLevelCheckBox").attr("disabled", true);
+    $("#engineTemCheckBox").attr("disabled", true);
+    $("#engineLoadCheckBox").attr("disabled", true);
+    $("#rpmCheckBox ").attr("disabled", true);
+    
     var tripdate=$("#selectTripDate").val();
     // var tripDateValue= $(this).text();
   var db = firebase.database();
@@ -382,6 +412,12 @@ $('#outsideCheckBox').click(function(){
    
   }
   else if($(this).is(":not(:checked)")){
+    $("#rpmCheckBox ").attr("disabled", false);
+    $("#speedCheckBox").attr("disabled", false);
+    $("#tspCheckBox").attr("disabled", false);
+    $("#fuelLevelCheckBox").attr("disabled", false);
+    $("#engineTemCheckBox").attr("disabled", false);
+    $("#engineLoadCheckBox").attr("disabled", false);
     var ctx = document.getElementById("myAreaChart");
              var myLineChart = new Chart(ctx,{
                type: 'line',
@@ -437,8 +473,15 @@ $('#outsideCheckBox').click(function(){
 });
 
 
-$('#TspCheckBox').click(function(){
+$('#tspCheckBox').click(function(){
+    $("#outsideCheckBox ").attr("disabled", true);
+    $("#speedCheckBox").attr("disabled", true);
+    $("#fuelLevelCheckBox").attr("disabled", true);
+    $("#engineTemCheckBox").attr("disabled", true);
+    $("#rpmCheckBox").attr("disabled", true);
+    $("#engineLoadCheckBox").attr("disabled", true);
   if($(this).is(":checked")){
+    
     var tripdate=$("#selectTripDate").val();
     // var tripDateValue= $(this).text();
     var db = firebase.database();
@@ -513,6 +556,12 @@ $('#TspCheckBox').click(function(){
              })
   }
   else if($(this).is(":not(:checked)")){
+    $("#outsideCheckBox ").attr("disabled", false);
+    $("#speedCheckBox").attr("disabled", false);
+    $("#fuelLevelCheckBox").attr("disabled", false);
+    $("#engineTemCheckBox").attr("disabled", false);
+    $("#rpmCheckBox").attr("disabled", false);
+    $("#engineLoadCheckBox").attr("disabled", false);
     var ctx = document.getElementById("myAreaChart");
     var myLineChart = new Chart(ctx,{
       type: 'line',
@@ -570,6 +619,12 @@ $('#TspCheckBox').click(function(){
 
 $('#fuelLevelCheckBox').click(function(){
   if($(this).is(":checked")){
+    $("#outsideCheckBox ").attr("disabled", true);
+    $("#speedCheckBox").attr("disabled", true);
+    $("#tspCheckBox").attr("disabled", true);
+    $("#engineTemCheckBox").attr("disabled", true);
+    $("#rpmCheckBox").attr("disabled", true);
+    $("#engineLoadCheckBox").attr("disabled", true);
     var tripdate=$("#selectTripDate").val();
  
     // var tripDateValue= $(this).text();
@@ -645,6 +700,12 @@ $('#fuelLevelCheckBox').click(function(){
            })
   }
   else if($(this).is(":not(:checked)")){
+    $("#outsideCheckBox ").attr("disabled", false);
+    $("#speedCheckBox").attr("disabled", false);
+    $("#tspCheckBox").attr("disabled", false);
+    $("#engineTemCheckBox").attr("disabled", false);
+    $("#rpmCheckBox").attr("disabled", false);
+    $("#engineLoadCheckBox").attr("disabled", false);
     var ctx = document.getElementById("myAreaChart");
     var myLineChart = new Chart(ctx,{
       type: 'line',
@@ -702,6 +763,13 @@ $('#fuelLevelCheckBox').click(function(){
 
 $('#engineTemCheckBox').click(function(){
   if($(this).is(":checked")){
+    $("#outsideCheckBox ").attr("disabled", true);
+    $("#speedCheckBox").attr("disabled", true);
+    $("#tspCheckBox").attr("disabled", true);
+    $("#fuelLevelCheckBox").attr("disabled", true);
+    $("#rpmCheckBox").attr("disabled", true);
+    $("#engineLoadCheckBox").attr("disabled", true);
+    
     var tripdate=$("#selectTripDate").val();
     // var tripDateValue= $(this).text();
     var db = firebase.database();
@@ -777,6 +845,13 @@ $('#engineTemCheckBox').click(function(){
    
   }
   else if($(this).is(":not(:checked)")){
+    $("#outsideCheckBox ").attr("disabled", false);
+    $("#speedCheckBox").attr("disabled", false);
+    $("#tspCheckBox").attr("disabled", false);
+    $("#fuelLevelCheckBox").attr("disabled", false);
+    $("#rpmCheckBox").attr("disabled", false);
+    $("#engineLoadCheckBox").attr("disabled", false);
+    
     var ctx = document.getElementById("myAreaChart");
     var myLineChart = new Chart(ctx,{
       type: 'line',
@@ -834,6 +909,12 @@ $('#engineTemCheckBox').click(function(){
 
 $('#engineLoadCheckBox').click(function(){
   if($(this).is(":checked")){
+    $("#outsideCheckBox ").attr("disabled", true);
+    $("#speedCheckBox").attr("disabled", true);
+    $("#tspCheckBox").attr("disabled", true);
+    $("#fuelLevelCheckBox").attr("disabled", true);
+    $("#rpmCheckBox").attr("disabled", true);
+    $("#engineTemCheckBox").attr("disabled", true);
     var tripdate=$("#selectTripDate").val();
     // var tripDateValue= $(this).text();
   var db = firebase.database();
@@ -908,6 +989,12 @@ $('#engineLoadCheckBox').click(function(){
            })
   }
   else if($(this).is(":not(:checked)")){
+    $("#outsideCheckBox ").attr("disabled", false);
+    $("#speedCheckBox").attr("disabled", false);
+    $("#tspCheckBox").attr("disabled", false);
+    $("#fuelLevelCheckBox").attr("disabled", false);
+    $("#rpmCheckBox").attr("disabled", false);
+    $("#engineTemCheckBox").attr("disabled", false);
     var ctx = document.getElementById("myAreaChart");
              var myLineChart = new Chart(ctx,{
                type: 'line',
@@ -1509,5 +1596,7 @@ $('#btnEngineLoad.dropdown-item').on('click', function() {
  
       
  });
+
+ 
  
  

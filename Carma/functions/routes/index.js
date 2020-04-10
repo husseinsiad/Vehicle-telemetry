@@ -69,20 +69,7 @@ router.get('/index', function(req, res) {
 	})
 	
 });
-router.get('/test', function(req, res) {
-	var tripDateRef=db.ref('/Users/BvbqNMlfdbTw537WJYUDWYxfHIy1/TripData');
-		var childKey=[];
-	tripDateRef.on("value", function(snap) {
-		snap.forEach(function(childNodes){
-			childKey.push(childNodes.key);
-		})
-		for(var i=0;i<=childKey.length;i++){
-			console.log(childKey[i]);
-		}
-		res.send(childKey);
-		
-		});
-});
+ 
 
 router.get('/', function(req, res) {
 	res.render('login');
