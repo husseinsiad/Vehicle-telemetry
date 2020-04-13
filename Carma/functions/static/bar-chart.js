@@ -8,8 +8,11 @@ $(document).ready(function() {
 });
  
 
-$('#btnTripSpeed.dropdown-item').on('click', function() {
-	var db = firebase.database();
+$("select.custom-select").change(function(){
+	var option = $(this).children("option:selected").val();
+	if(option=="Speed"){
+
+		var db = firebase.database();
 	var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
 		var tripDateList=[];
 		var sumSpeed=0;
@@ -102,11 +105,10 @@ $('#btnTripSpeed.dropdown-item').on('click', function() {
 		 
 		});
 
-});
-
-
-$('#btnTripRpm.dropdown-item').on('click', function() {
-	// $("#refreshBar").load(location.href + " #refreshBar");
+	 
+	}
+	else if(option=="RPM"){
+		
 	var db = firebase.database();
 	var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
 		var tripDateList=[];
@@ -199,5 +201,12 @@ $('#btnTripRpm.dropdown-item').on('click', function() {
 	// } // end loop
 		 
 		});
+	}
 
+	else{
+		$("#refreshBar").load(location.href + " #refreshBar");
+	}
+	
+	 
 });
+

@@ -19,9 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-  
-
-  
+ 
 
 </head>
 
@@ -220,24 +218,23 @@
             <canvas id="myAreaChart" width="100%" height="30"></canvas>
           </div>
         </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
         </div>
 
         <div class="row">
-          <div class="col-lg-8">
+          <div class="col-lg-12">
             <div class="card mb-3">
               <div class="card-header">
                 <i class="fas fa-chart-bar"> </i>
-               Trip Data
+               Average Trip Data
                <div class="btn-group">
-                <button type="button"class="btn btn-light border solid ">Average off% </button>
-                <button type="button"  id="btn-tripDate" class="btn btn-light border solid dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="btnTripSpeed">Speed</a></li>
-                    <li><a class="dropdown-item" id="btnTripRpm">RPM</a></li>
-                  </ul>
+ 
+                  <select class="custom-select" id="selectAverage">
+                    <option selected>Average off..</option>
+                    <option id="speedOption">Speed</option>
+                    <option id="rpmOption">RPM</option>
+                    
+                  </select>
               </div>
               </div>
               <div id="refreshBar">
@@ -249,7 +246,7 @@
               <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
             </div>
           </div>
-          <div class="col-lg-4">
+          <!-- <div class="col-lg-4">
             <div class="card mb-3">
               <div class="card-header">
                 <i class="fas fa-chart-pie"></i>
@@ -259,7 +256,7 @@
               </div>
               <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
             </div>
-          </div>
+          </div> -->
         </div>
  
       </div>
@@ -324,6 +321,8 @@
   <script src="static/area-chart.js"></script>
   <script src="static/bar-chart.js"></script>
   <script src="static/pie-chart.js"></script>
+
+  
 
   <!-- <script src="js/demo/chart-area-demo.js"></script> -->
   <!-- <script src="js/demo/chart-bar-demo.js"></script> -->

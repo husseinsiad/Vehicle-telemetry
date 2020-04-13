@@ -87,7 +87,7 @@ router.post('/login', function(req, res) {
 			//Get Current UserID
 			var userid = firebase.auth().currentUser.uid;
 			// Get User Information
-			console.log(userid);
+			// console.log(userid);
 			var userRef = db.ref('/Users/' + userid);
 			userRef.on('value', function(snapshot) {
 				var userData = snapshot.val();
@@ -147,7 +147,7 @@ router.post('/register', function(req, res) {
 		.catch(function(error) {
 			var errorMessage = error.message;
 			req.flash('error', errorMessage);
-			console.log(error);
+			// console.log(error);
 			res.redirect('/register');
 		});
 });
