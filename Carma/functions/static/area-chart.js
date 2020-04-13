@@ -19,6 +19,7 @@ firebase.initializeApp(firebaseConfig);
  
   $('#speedCheckBox').click(function(){
       if($(this).is(":checked")){
+        // $("canvas").show();
         $("#rpmCheckBox").attr("disabled", true);
         $("#outsideCheckBox").attr("disabled", true);
         $("#tspCheckBox").attr("disabled", true);
@@ -69,16 +70,16 @@ firebase.initializeApp(firebaseConfig);
                 // labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
                 datasets: [{
                   label: "Speed",
-                  lineTension: 0.3,
+                  // lineTension: 0.3,
                   backgroundColor: "rgba(2,117,216,0.2)",
                   borderColor: "rgba(2,117,216,1)",
-                  pointRadius: 5,
+                  // pointRadius: 5,
                   pointBackgroundColor: "rgb(0,128,0)",
                   pointBorderColor: "rgba(255,255,255,0.8)",
-                  pointHoverRadius: 5,
+                  pointHoverRadius: 1,
                   pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                  pointHitRadius: 50,
-                  pointBorderWidth: 2,
+                  // pointHitRadius: 10,
+                  pointBorderWidth: 0,
                   // data:speedList,
                   data: speedList,
                 }],
@@ -117,6 +118,7 @@ firebase.initializeApp(firebaseConfig);
           
 
           })
+
       }
       else if($(this).is(":not(:checked)")){
         $("#rpmCheckBox").attr("disabled", false);
@@ -133,16 +135,16 @@ firebase.initializeApp(firebaseConfig);
               labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10],
               datasets: [{
                 label: "Speed",
-                lineTension: 0.3,
+                // lineTension: 0.3,
                 backgroundColor: "rgba(2,117,216,0.2)",
                 borderColor: "rgba(2,117,216,1)",
-                pointRadius: 5,
+                // pointRadius: 5,
                 pointBackgroundColor: "rgb(0,128,0)",
                 pointBorderColor: "rgba(255,255,255,0.8)",
-                pointHoverRadius: 5,
+                pointHoverRadius: 1,
                 pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                pointHitRadius: 50,
-                pointBorderWidth: 2,
+                // pointHitRadius: 50,
+                // pointBorderWidth: 2,
                 // data:speedList,
                 data: [0,0,0,0,0,0,0,0,0,0],
               }],
@@ -177,14 +179,15 @@ firebase.initializeApp(firebaseConfig);
             }
           });
            
-     
-      
-          // $("#result").html("Checkbox is unchecked.");
+          $("#refresh").load(location.href + " #refresh");
+             
+ 
       }
   });
 
   $('#rpmCheckBox').click(function(){
     if($(this).is(":checked")){
+      $("canvas").show();
         $("#speedCheckBox").attr("disabled", true);
         $("#outsideCheckBox").attr("disabled", true);
         $("#tspCheckBox").attr("disabled", true);
@@ -218,16 +221,16 @@ firebase.initializeApp(firebaseConfig);
                  // labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
                  datasets: [{
                    label: "RPM",
-                   lineTension: 0.3,
+                  //  lineTension: 0.3,
                    backgroundColor: "rgba(2,117,216,0.2)",
                    borderColor: "rgba(2,117,216,1)",
-                   pointRadius: 5,
+                  //  pointRadius: 5,
                    pointBackgroundColor: "rgb(128,0,0,0.6)",
                    pointBorderColor: "rgba(255,255,255,0.8)",
                    pointHoverRadius: 0,
                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                   pointHitRadius: 50,
-                   pointBorderWidth: 2,
+                  //  pointHitRadius: 50,
+                  //  pointBorderWidth: 2,
                    // data:speedList,
                    data: rpmList,
                  }],
@@ -265,6 +268,7 @@ firebase.initializeApp(firebaseConfig);
  
            })
         // $("#results").html(tripdate);
+        //  $("canvas").hide();
     }
     else if($(this).is(":not(:checked)")){
       $("#speedCheckBox").attr("disabled", false);
@@ -281,16 +285,16 @@ firebase.initializeApp(firebaseConfig);
                  labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10],
                  datasets: [{
                    label: "RPM",
-                   lineTension: 0.3,
+                  //  lineTension: 0.3,
                    backgroundColor: "rgba(2,117,216,0.2)",
                    borderColor: "rgba(2,117,216,1)",
-                   pointRadius: 5,
+                  //  pointRadius: 5,
                    pointBackgroundColor: "rgb(128,0,0,0.6)",
                    pointBorderColor: "rgba(255,255,255,0.8)",
                    pointHoverRadius: 0,
                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                   pointHitRadius: 50,
-                   pointBorderWidth: 2,
+                  //  pointHitRadius: 50,
+                  //  pointBorderWidth: 2,
                    // data:speedList,
                    data: [1,2,3,4,5,6,7,8,9,10],
                  }],
@@ -324,7 +328,9 @@ firebase.initializeApp(firebaseConfig);
                  }
                }
              });
-        // $("#results").html("RPM is unchecked.");
+ 
+        $("#refresh").load(location.href + " #refresh");
+
     }
 });
 
@@ -363,16 +369,16 @@ $('#outsideCheckBox').click(function(){
                  // labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
                  datasets: [{
                    label: "Outside Temprature",
-                   lineTension: 0.3,
+                  //  lineTension: 0.3,
                    backgroundColor: "rgba(2,117,216,0.2)",
                    borderColor: "rgba(2,117,216,1)",
-                   pointRadius: 5,
+                  //  pointRadius: 5,
                    pointBackgroundColor: "rgb(0,255,0)",
                    pointBorderColor: "rgba(255,255,255,0.8)",
                    pointHoverRadius: 0,
                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                   pointHitRadius: 50,
-                   pointBorderWidth: 2,
+                  //  pointHitRadius: 50,
+                  //  pointBorderWidth: 2,
                    // data:speedList,
                    data: tempratureList,
                  }],
@@ -426,16 +432,16 @@ $('#outsideCheckBox').click(function(){
                  labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10],
                  datasets: [{
                    label: "Outside Temprature",
-                   lineTension: 0.3,
+                  //  lineTension: 0.3,
                    backgroundColor: "rgba(2,117,216,0.2)",
                    borderColor: "rgba(2,117,216,1)",
-                   pointRadius: 5,
+                  //  pointRadius: 5,
                    pointBackgroundColor: "rgb(0,255,0)",
                    pointBorderColor: "rgba(255,255,255,0.8)",
                    pointHoverRadius: 0,
                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                   pointHitRadius: 50,
-                   pointBorderWidth: 2,
+                  //  pointHitRadius: 50,
+                  //  pointBorderWidth: 2,
                    // data:speedList,
                    data: [1,2,3,4,5,6,7,8,9,10],
                  }],
@@ -469,19 +475,22 @@ $('#outsideCheckBox').click(function(){
                  }
                }
              });
+
+             $("#refresh").load(location.href + " #refresh");
+             
   }
 });
 
 
 $('#tspCheckBox').click(function(){
+   
+  if($(this).is(":checked")){
     $("#outsideCheckBox ").attr("disabled", true);
     $("#speedCheckBox").attr("disabled", true);
     $("#fuelLevelCheckBox").attr("disabled", true);
     $("#engineTemCheckBox").attr("disabled", true);
     $("#rpmCheckBox").attr("disabled", true);
     $("#engineLoadCheckBox").attr("disabled", true);
-  if($(this).is(":checked")){
-    
     var tripdate=$("#selectTripDate").val();
     // var tripDateValue= $(this).text();
     var db = firebase.database();
@@ -508,16 +517,16 @@ $('#tspCheckBox').click(function(){
                    // labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
                    datasets: [{
                      label: "Throttle_position%",
-                     lineTension: 0.3,
+                    //  lineTension: 0.3,
                      backgroundColor: "rgba(2,117,216,0.2)",
                      borderColor: "rgba(2,117,216,1)",
-                     pointRadius: 5,
+                    //  pointRadius: 5,
                      pointBackgroundColor: "rgb(255,255,0)",
                      pointBorderColor: "rgba(255,255,255,0.8)",
                      pointHoverRadius: 0,
                      pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                     pointHitRadius: 50,
-                     pointBorderWidth: 2,
+                    //  pointHitRadius: 50,
+                    //  pointBorderWidth: 2,
                      // data:speedList,
                      data: Throttle_positionList,
                    }],
@@ -570,16 +579,16 @@ $('#tspCheckBox').click(function(){
         labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10],
         datasets: [{
           label: "Throttle_position%",
-          lineTension: 0.3,
+          // lineTension: 0.3,
           backgroundColor: "rgba(2,117,216,0.2)",
           borderColor: "rgba(2,117,216,1)",
-          pointRadius: 5,
+          // pointRadius: 5,
           pointBackgroundColor: "rgb(255,255,0)",
           pointBorderColor: "rgba(255,255,255,0.8)",
           pointHoverRadius: 0,
           pointHoverBackgroundColor: "rgba(2,117,216,1)",
-          pointHitRadius: 50,
-          pointBorderWidth: 2,
+          // pointHitRadius: 50,
+          // pointBorderWidth: 2,
           // data:speedList,
           data: [1,2,3,4,5,6,7,8,9,10],
         }],
@@ -613,6 +622,8 @@ $('#tspCheckBox').click(function(){
         }
       }
     });
+
+    $("#refresh").load(location.href + " #refresh");
   }
 });
 
@@ -652,16 +663,16 @@ $('#fuelLevelCheckBox').click(function(){
                  // labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
                  datasets: [{
                    label: 'Fuel level',
-                   lineTension: 0.3,
+                  //  lineTension: 0.3,
                    backgroundColor: "rgba(2,117,216,0.2)",
                    borderColor: "rgba(2,117,216,1)",
-                   pointRadius: 5,
+                  //  pointRadius: 5,
                    pointBackgroundColor: "rgb(255,0,255)",
                    pointBorderColor: "rgba(255,255,255,0.8)",
                    pointHoverRadius: 0,
                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                   pointHitRadius: 50,
-                   pointBorderWidth: 2,
+                  //  pointHitRadius: 50,
+                  //  pointBorderWidth: 2,
                    // data:speedList,
                    data: fuelLevelList,
                  }],
@@ -714,16 +725,16 @@ $('#fuelLevelCheckBox').click(function(){
         labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10],
         datasets: [{
           label: 'Fuel level',
-          lineTension: 0.3,
+          // lineTension: 0.3,
           backgroundColor: "rgba(2,117,216,0.2)",
           borderColor: "rgba(2,117,216,1)",
-          pointRadius: 5,
+          // pointRadius: 5,
           pointBackgroundColor: "rgb(255,0,255)",
           pointBorderColor: "rgba(255,255,255,0.8)",
           pointHoverRadius: 0,
           pointHoverBackgroundColor: "rgba(2,117,216,1)",
-          pointHitRadius: 50,
-          pointBorderWidth: 2,
+          // pointHitRadius: 50,
+          // pointBorderWidth: 2,
           // data:speedList,
           data: [1,2,3,4,5,6,7,8,9,10],
         }],
@@ -757,6 +768,7 @@ $('#fuelLevelCheckBox').click(function(){
         }
       }
     });
+    $("#refresh").load(location.href + " #refresh");
   }
 });
 
@@ -796,16 +808,16 @@ $('#engineTemCheckBox').click(function(){
                    // labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
                    datasets: [{
                      label: 'Engine Temp',
-                     lineTension: 0.3,
+                    //  lineTension: 0.3,
                      backgroundColor: "rgba(2,117,216,0.2)",
                      borderColor: "rgba(2,117,216,1)",
-                     pointRadius: 5,
+                    //  pointRadius: 5,
                      pointBackgroundColor: "rgb(0,0,255)	",
                      pointBorderColor: "rgba(255,255,255,0.8)",
                      pointHoverRadius: 0,
                      pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                     pointHitRadius: 50,
-                     pointBorderWidth: 2,
+                    //  pointHitRadius: 50,
+                    //  pointBorderWidth: 2,
                      // data:speedList,
                      data: COOLANT_TEMPList,
                    }],
@@ -860,16 +872,16 @@ $('#engineTemCheckBox').click(function(){
         labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10],
         datasets: [{
           label: 'Engine Temp',
-          lineTension: 0.3,
+          // lineTension: 0.3,
           backgroundColor: "rgba(2,117,216,0.2)",
           borderColor: "rgba(2,117,216,1)",
-          pointRadius: 5,
+          // pointRadius: 5,
           pointBackgroundColor: "rgb(0,0,255)	",
           pointBorderColor: "rgba(255,255,255,0.8)",
           pointHoverRadius: 0,
           pointHoverBackgroundColor: "rgba(2,117,216,1)",
-          pointHitRadius: 50,
-          pointBorderWidth: 2,
+          // pointHitRadius: 50,
+          // pointBorderWidth: 2,
           // data:speedList,
           data: [1,2,3,4,5,6,7,8,9,10],
         }],
@@ -903,6 +915,7 @@ $('#engineTemCheckBox').click(function(){
         }
       }
     });
+    $("#refresh").load(location.href + " #refresh");
   }
 });
 
@@ -941,16 +954,16 @@ $('#engineLoadCheckBox').click(function(){
                  // labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
                  datasets: [{
                    label: 'Engine Load',
-                   lineTension: 0.3,
+                  //  lineTension: 0.3,
                    backgroundColor: "rgba(2,117,216,0.2)",
                    borderColor: "rgba(2,117,216,1)",
-                   pointRadius: 5,
+                  //  pointRadius: 5,
                    pointBackgroundColor: "rgb(128,128,0)",
                    pointBorderColor: "rgba(255,255,255,0.8)",
                    pointHoverRadius: 0,
                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                   pointHitRadius: 50,
-                   pointBorderWidth: 2,
+                  //  pointHitRadius: 50,
+                  //  pointBorderWidth: 2,
                    // data:speedList,
                    data: ENGINE_LOADList,
                  }],
@@ -1003,16 +1016,16 @@ $('#engineLoadCheckBox').click(function(){
                  labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10],
                  datasets: [{
                    label: 'Engine Load',
-                   lineTension: 0.3,
+                  //  lineTension: 0.3,
                    backgroundColor: "rgba(2,117,216,0.2)",
                    borderColor: "rgba(2,117,216,1)",
-                   pointRadius: 5,
+                  //  pointRadius: 5,
                    pointBackgroundColor: "rgb(128,128,0)",
                    pointBorderColor: "rgba(255,255,255,0.8)",
                    pointHoverRadius: 0,
                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                   pointHitRadius: 50,
-                   pointBorderWidth: 2,
+                  //  pointHitRadius: 50,
+                  //  pointBorderWidth: 2,
                    // data:speedList,
                    data: [1,2,3,4,5,6,7,8,9,10],
                  }],
@@ -1046,6 +1059,7 @@ $('#engineLoadCheckBox').click(function(){
                  }
                }
              });
+             $("#refresh").load(location.href + " #refresh");
   }
 });
  

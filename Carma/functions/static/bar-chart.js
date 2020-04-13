@@ -106,6 +106,7 @@ $('#btnTripSpeed.dropdown-item').on('click', function() {
 
 
 $('#btnTripRpm.dropdown-item').on('click', function() {
+	// $("#refreshBar").load(location.href + " #refreshBar");
 	var db = firebase.database();
 	var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
 		var tripDateList=[];
