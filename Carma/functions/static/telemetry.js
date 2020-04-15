@@ -1,6 +1,53 @@
 /* The first part of this code  uses socket io to transfer real telemerty */
 /* Parameters that  needs to be feeded to get an output are stgated below */
+const firebaseConfig = {
+    apiKey: 'AIzaSyC8ek2z-3xDI8rlaePQiOw-NDByJI8JqZ4',
+    authDomain: 'se491-5f60f.firebaseapp.com',
+    databaseURL: 'https://se491-5f60f.firebaseio.com',
+    projectId: 'se491-5f60f',
+    storageBucket: 'se491-5f60f.appspot.com',
+    messagingSenderId: '541695700970',
+    appId: '1:541695700970:web:1438c4a2ac47ea4fe4cc93',
+    measurementId: 'G-08J4E1H1P2'
+  };
+  
+  // Initialize Firebase
+  
+  firebase.initializeApp(firebaseConfig);
+    // firebase.initializeApp(firebaseConfig);
+    var db = firebase.database();
+    var index=[];
+    var totalIndex=0;
+    var latList=[];
+    var lotList=[];
+    var lat=0;
+    var lon=0;
+ var tripDateRef=db.ref('/Users/8mNJh20teceTE7eUcf7WtF0RwI22/TripData/Trip 04-02-2020 16:03:54'); 
+         tripDateRef.on('value',function(snap){
+           snap.forEach(function(childNodes){
+             lat=childNodes.val().lat;
+             lon=childNodes.val().lon;
+            //  latList.push(lat);
+            //  lotList.push(lot)
+          //    var i = rpm.indexOf(" ");  // Gets the first index where a space occours
+          //    vLocationList.push(); // Gets the first part
+          //    index.push(childNodes.val().index);
+          //    totalIndex+=childNodes.val().index;
+          console.log("lat " +lat);
 
+          console.log("lot "+lon);
+         
+           })
+
+           console.log("lat outside " +lat);
+
+          console.log("lot outside"+lon);
+          
+           marker.setPosition( new google.maps.LatLng( lat, lon))
+           marker.setIcon(image)
+});
+
+ 
 
 var current_location = {lat: 44.95, lng: -93.37};
 var current_orientation = 0
@@ -29,7 +76,7 @@ var checkOfflineInterval = setInterval(() => {
   offlineCounter++
   if (offlineCounter > 5) {
     vehicleOffline = true
-    document.getElementById('offline').style.display = "block"
+    //document.getElementById('offline').style.display = "block"
 
     if (current_orientation < 0) {
       current_orientation = current_orientation + 2 * Math.PI
@@ -44,29 +91,25 @@ var checkOfflineInterval = setInterval(() => {
     updateSpeedometer(0)
     updateSpeedometerText(0)
 
-    // Update Steering Wheel
-    rotatewheel(0, "wheel_Speeds", "wheel")
-    updateSteeringAngleText(0)
+
+    /// Update RPM
+    updateRPM(0)
+    updateRPMText(0)
+
 
     // Update the throttle
     updateBar(0, "bar_txtSpeeds", "myBar")
     updateThrottleLabel('Throttle %')
 
-    // Update the brakes
+    // Update the fuel level
     updateBar(0, "gas_txtSpeeds", "brakeBar")
     updateBrakeLabel('Brake %')
-
-    var green = document.getElementById('greenLed')
-    var red = document.getElementById('redLed')
-    red.className = "led-red-off"
-    green.className = "led-green-off"
-
 
   }
 }, 1000)
 
 
-const socket = io('localhost:80')
+const socket = 'localhost:3000';
 socket.on('initData', (lastData) => {
   current_location = lastData.lastKnownLocation
   current_orientation = lastData.lastKnownOrientation
@@ -89,60 +132,46 @@ socket.on('initData', (lastData) => {
     stopCentering()
   })
 })
-socket.on('dataToWebsite', (vehicleData) => {
 
-    offlineCounter = 0
-    vehicleOffline = false
-    document.getElementById('offline').style.display = "none"
 
-    //Update the orientation
-    if (vehicleData.orientation < 0) {
-      vehicleData.orientation = vehicleData.orientation + 2 * Math.PI
-    }
-    let orientation = 360 - (vehicleData.orientation * 180.0 / Math.PI)
-    image.rotation = orientation + 90
-
-    /// Update Map Position
-    marker.setPosition( new google.maps.LatLng( vehicleData.latitude, vehicleData.longitude))
-    marker.setIcon(image)
-
-    /// Update Speedometer
-    updateSpeedometer(vehicleData.vehicle_speed * 2.236)
-    updateSpeedometerText(vehicleData.vehicle_speed * 2.236)
-
-    // Update Steering Wheel
-    rotatewheel(vehicleData.steering_angle * 57.296, "wheel_Speeds", "wheel")
-    updateSteeringAngleText(vehicleData.steering_angle * 57.296)
-
-    // Update the throttle
-    updateBar(vehicleData.pct_throttle * 100, "bar_txtSpeeds", "myBar")
-    var telemetry = parseFloat(vehicleData.pct_throttle * 100).toFixed(0);
-    updateThrottleLabel(`Throttle ${telemetry}%`)
-
-    // Update the brakes
-    updateBar(vehicleData.pct_brake * 100, "gas_txtSpeeds", "brakeBar")
-    telemetry = parseFloat(vehicleData.pct_brake * 100).toFixed(0);
-    updateBrakeLabel(`Brakes ${telemetry}%`)
-
-    // Update enable light
-    var green = document.getElementById('greenLed')
-    var red = document.getElementById('redLed')
-    if (vehicleData.vehicle_speed > 0) {
-      green.className = "led-green-on"
-      red.className = "led-red-off"
-      document.getElementById("text").innerHTML = "The car is moving";
-
-    } else {
-      green.className = "led-green-off"
-      red.className = "led-red-on"
-      document.getElementById("text").innerHTML = "The car is not moving";
-      updateThrottleLabel('Throttle %')
-      updateBrakeLabel('Brakes %')
-
-    }
-
-})
-
+//PLace where it gets data from backend
+// socket.on('dataToWebsite', (vehicleData) => {
+//
+//     offlineCounter = 0
+//     vehicleOffline = false
+//     document.getElementById('offline').style.display = "none"
+//
+//     //Update the orientation
+//     if (vehicleData.orientation < 0) {
+//       vehicleData.orientation = vehicleData.orientation + 2 * Math.PI
+//     }
+//     let orientation = 360 - (vehicleData.orientation * 180.0 / Math.PI)
+//     image.rotation = orientation + 90
+//
+      //Update Map Position
+    //   marker.setPosition( new google.maps.LatLng( vehicleData.latitude, vehicleData.longitude))
+    //   marker.setIcon(image)
+//
+//     /// Update Speedometer
+//     updateSpeedometer(vehicleData.vehicle_speed * 2.236)
+//     updateSpeedometerText(vehicleData.vehicle_speed * 2.236)
+//
+//     /// Update RPM
+//     updateRPM(vehicleData.RPM / 100)
+//     updateRPMText(vehicleData.RPM / 100)
+//
+//     // Update the throttle
+//     updateBar(vehicleData.pct_throttle * 100, "bar_txtSpeeds", "myBar")
+//     var telemetry = parseFloat(vehicleData.pct_throttle * 100).toFixed(0);
+//     updateThrottleLabel(`Throttle ${telemetry}%`)
+//
+//     // Update the fuel level
+//     updateBar(vehicleData.pct_brake * 100, "gas_txtSpeeds", "brakeBar")
+//     telemetry = parseFloat(vehicleData.pct_brake * 100).toFixed(0);
+//     updateBrakeLabel(`Brakes ${telemetry}%`)
+//
+// })
+////////
 
 function centerMapOnVehicle() {
   var latLng = marker.getPosition(); // returns LatLng object
@@ -165,9 +194,9 @@ function updateSpeedometerText(value) {
   document.getElementById("speedometerTele").innerHTML = `Vehicle Speed ${telemetry} mph`;
 }
 
-function updateSteeringAngleText(value) {
-  var telemetry = parseFloat(value).toFixed(1);
-  document.getElementById("steeringWheelTele").innerHTML = `Steering Angle ${telemetry}°`;
+function updateRPMText(value) {
+  var telemetry = parseFloat(value).toFixed(0);
+  document.getElementById("RPMTele").innerHTML = `Vehicle RPM ${telemetry} rpm`;
 }
 
 
@@ -309,6 +338,9 @@ function drawInnerMetallicArc(options) {
 
     */
 }
+
+
+
 
 function drawMetallicArc(options) {
     /* Draw the metallic border of the speedometer
@@ -680,6 +712,8 @@ function clearCanvas(options) {
 }
 
 
+///This is for Speed
+
 function drawVehicleSpeed(iTargetSpeed) {
     /* Main entry point for drawing the speedometer
     * If canvas is not support alert the user.
@@ -719,9 +753,49 @@ function drawVehicleSpeed(iTargetSpeed) {
 
 }
 
+///This is for RPM
+
+function drawRPM(iTargetSpeed) {
+    /* Main entry point for drawing the speedometer
+    * If canvas is not support alert the user.
+    */
+
+    var canvas = document.getElementById('RPMcanvas'),
+       options = null;
+
+    // Canvas good?
+    if (canvas !== null && canvas.getContext) {
+        options = buildOptionsAsJSON(canvas, iTargetSpeed);
+
+        // Clear canvas
+        clearCanvas(options);
+
+        // Draw the metallic styled edge
+        drawMetallicArc(options);
+
+        // Draw thw background
+        drawBackground(options);
+
+        // Draw tick marks
+        drawTicks(options);
+
+        // Draw labels on markers
+        drawTextMarkers(options);
+
+        // Draw speeometer colour arc
+        drawSpeedometerColourArc(options);
+
+        // Draw the needle and base
+        drawNeedle(options);
+
+    } else {
+        console.log("Canvas not supported by your browser!");
+    }
+
+}
 
 
-
+//speed
 function updateSpeedometer(newValue) {
 
 
@@ -738,6 +812,28 @@ function updateSpeedometer(newValue) {
             iTargetSpeed = 80;
         }
         drawVehicleSpeed(iTargetSpeed)
+
+    }
+}
+
+//RPM
+
+function updateRPM(newValue) {
+
+
+    if (newValue !== null) {
+
+        let iTargetSpeed = parseFloat(newValue);
+
+        // Sanity checks
+        if (isNaN(iTargetSpeed)) {
+            iTargetSpeed = 0;
+        } else if (iTargetSpeed < 0) {
+            iTargetSpeed = 0;
+        } else if (iTargetSpeed > 80) {
+            iTargetSpeed = 80;
+        }
+        drawRPM(iTargetSpeed)
 
     }
 }
