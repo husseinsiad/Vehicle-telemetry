@@ -41,9 +41,9 @@
 </head>
 
 <body id="page-top" onload="drawVehicleSpeed(vehiclespeedcanvas,0,0); drawRPM(RPMcanvas,0,0); ">
-  
 
-  
+
+
   <!-- <body onload="drawVehicleSpeed(vehiclespeedcanvas,0,0); drawRPM(RPMcanvas,0,0); "></body> -->
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -67,7 +67,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a> -->
         </div>
-      <!-- </li> --> 
+      <!-- </li> -->
       <!-- <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-envelope fa-fw"></i>
@@ -103,7 +103,7 @@
         <a class="nav-link" href="index">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
-          
+
         </a>
       </li>
       <li class="nav-item dropdown">
@@ -113,18 +113,18 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Options:</h6>
-        
+
           <a class="dropdown-item" href="carmd">Diagnose</a>
           <a class="dropdown-item" href="blank">Error Code</a>
         </div>
       </li>
-     
+
       <li class="nav-item">
         <a class="nav-link" href="telemetry">
             <i class="far fa-life-ring"></i>
           <span>Live Telemetry</span></a>
       </li>
-   
+
     </ul>
 
     <div id="content-wrapper">
@@ -146,9 +146,10 @@
             Live Telmetry Data</div>
           <div class="card-body">
             <!-- MAP -->
-            
-            
+
+
             <div class="container">
+
               <div class="row">
                 <div class="col-md-6"
                      style="margin-top: 10px ;margin-bottom: 10px ;padding: 10px; min-width: 330px; box-shadow: 0 0 1px grey; float: left"
@@ -157,107 +158,107 @@
                   <style>
                      .map {
                       height: 486px;
-                    
+
                     }
                     #map{
                       height: 486px;
                     }
-                    
-                    
+
+
                     @media (max-width: 1199px) {
-                    
+
                       .map {
                           height: 780px;
                       }
-                    
+
                       #map {
                           height: 780px;
                       }
-                    
+
                     }
-                    
-                    
-                    
+
+
+
                     @media (max-width: 991px) {
-                    
+
                       .map {
                           height: 845px;
                       }
-                    
+
                       #map {
                           height: 845px;
                       }
-                    
+
                     }
                     </style>
-        
+
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                         <div class="carousel-inner map">
                             <div class="carousel-item active map">
                                 <div id="map" class="map1"></div>
-        
+
                                <script>
                                  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
+                                   zoom: 8,
 
-    center: current_location
-});
+                                   center: current_location
+                                 });
 
-marker = new google.maps.Marker({position: current_location, map: map, icon: image});
+                                 marker = new google.maps.Marker({position: current_location, map: map, icon: image});
 
-var controlDiv = document.createElement('div');
+                                 var controlDiv = document.createElement('div');
 
-var controlUI = document.createElement('div');
-controlUI.style.backgroundColor = '#fff';
-controlUI.style.border = '2px solid #fff';
-controlUI.style.borderRadius = '3px';
-controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-controlUI.style.cursor = 'pointer';
-controlUI.style.marginBottom = '9px';
-controlUI.style.textAlign = 'center';
-controlUI.title = 'Click to recenter the map';
-controlDiv.appendChild(controlUI);
+                                 var controlUI = document.createElement('div');
+                                 controlUI.style.backgroundColor = '#fff';
+                                 controlUI.style.border = '2px solid #fff';
+                                 controlUI.style.borderRadius = '3px';
+                                 controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+                                 controlUI.style.cursor = 'pointer';
+                                 controlUI.style.marginBottom = '9px';
+                                 controlUI.style.textAlign = 'center';
+                                 controlUI.title = 'Click to recenter the map';
+                                 controlDiv.appendChild(controlUI);
 
-var controlText = document.createElement('div');
-controlText.style.color = 'rgb(240,66,49)';
-controlText.style.fontFamily = 'didact gothic';
-controlText.style.fontSize = '16px';
-controlText.style.lineHeight = '38px';
-controlText.style.paddingLeft = '5px';
-controlText.style.paddingRight = '5px';
-controlText.innerHTML = 'Center Map';
-controlUI.appendChild(controlText);
+                                 var controlText = document.createElement('div');
+                                 controlText.style.color = 'rgb(240,66,49)';
+                                 controlText.style.fontFamily = 'didact gothic';
+                                 controlText.style.fontSize = '16px';
+                                 controlText.style.lineHeight = '38px';
+                                 controlText.style.paddingLeft = '5px';
+                                 controlText.style.paddingRight = '5px';
+                                 controlText.innerHTML = 'Center Map';
+                                 controlUI.appendChild(controlText);
 
-controlUI.addEventListener('click', function () {
-    startCentering()
-});
+                                 controlUI.addEventListener('click', function () {
+                                   startCentering()
+                                 });
 
-controlDiv.index = 1;
-map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
-                                 
+                                 controlDiv.index = 1;
+                                 map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
+
                                     //controlDiv.style.paddingTop = '9px';
-        
-                                </script> 
+
+                                </script>
                             </div>
                             <div class="carousel-item" style="height:100%; ">
                               <!-- For object detection -->
                             </div>
-        
+
                         </div>
-        
+
                     </div>
-        
-        
+
+
                 </div>
-        
-                <div class="col-md-3" style="padding: 0px; min-width: 330px; margin-left:0px;">
-        
+
+                <div class="col-md-1" style="padding: 0px; min-width: 0px; margin-left:0px;">
+
                 <div class="row"
-                         style="width:100%; min-width: 300px ; margin-left:10px; margin-right: 10px ;margin-top: 10px; box-shadow: 0 0 1px grey;"
+                         style="width:100%; min-width: 210px ; margin-left:10px; margin-right: 10px ;margin-top: 10px; box-shadow: 0 0 1px grey;"
                          align="center">
-        
-        
-        
+
+
+
                             <div id='d2' style=" z-index:1;padding-top: 50px;padding-bottom: 50px; padding-right: 35px ;">
                                 <canvas class="meter2" id="vehiclespeedcanvas" style=" width: 170px;padding-left: 10%">Canvas not
                                     available.
@@ -266,7 +267,7 @@ map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
                                     <label id="speedometerTele" style="font-size: 12px; font-family:'Didact gothic', Arial, Helvetica, sans-serif; ">Vehicle
                                         Speed
                                         mph</label>
-        
+
                                 </div>
                                 <script>
                                     var c = document.getElementById("vehiclespeedcanvas");
@@ -277,17 +278,17 @@ map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
                                     //ctx.strokeRect(5, 5, 25, 15);
                                 </script>
                             </div>
-        
-        
+
+
                       </div>
-        
+
         <!-- RPM Section -->
-        
+
                          <div class="row"
-                                  style="width:100%; min-width: 300px ; margin-left:10px; margin-right: 10px ;margin-top: 0px; ;box-shadow: 0 0 1px grey;"
+                                  style="width:100%; min-width: 210px ; margin-left:10px; margin-right: 10px ;margin-top: 0px; ;box-shadow: 0 0 1px grey;"
                                   align="center">
-        
-        
+
+
                         <div id='d3' style=" z-index:1;padding-top: 50px;padding-bottom: 50px; padding-right: 35px ;">
                             <canvas class="meter3" id="RPMcanvas" style=" width: 170px;padding-left: 10%">Canvas not
                                 available.
@@ -296,7 +297,7 @@ map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
                                 <label id="RPMTele" style="font-size: 12px; font-family:'Didact gothic', Arial, Helvetica, sans-serif; ">Vehicle
                                     RPM
                                     rpm</label>
-        
+
                             </div>
                             <script>
                                 var c = document.getElementById("RPMcanvas");
@@ -307,10 +308,12 @@ map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
                                 //ctx.strokeRect(5, 5, 25, 15);
                             </script>
                         </div>
-        
+
                     </div>
-                    <div class="col-md-3" style="padding: 0px; min-width: 330px; margin-left:0px;">
-        
+                  </div>
+
+                    <div class="col-md-1" style="padding: 0px; min-width: 330px; margin-left:100px;">
+
                       <div class="row" style="padding: 50px">
 
                           <div class="col-md-12" style="padding-top: 0px; width: 100%; padding: 0px 30px" align="center">
@@ -328,7 +331,7 @@ map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
 
                           <div class="col-md-12 box" style="padding-top: 15px; padding: 0px 30px" align="center">
                               <label id="brakeLabel"
-                                     style="font-size: 12px; width:100px; margin-left: 5px; font-family:'Didact gothic', Arial, Helvetica, sans-serif; padding-top: 20px;">Fuel Level
+                                     style="font-size: 12px; width:100px; margin-left: 5px; font-family:'Didact gothic', Arial, Helvetica, sans-serif; padding-top: 45px;">Fuel Level
                                   %</label>
                               <div id="brakeProgress" style=" width: 100%" align="left">
                                   <div id="brakeBar"></div>
@@ -340,11 +343,12 @@ map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
                       </div>
 
                     </div>
+
                   </div>
-        
-        
-        
-                 
+
+
+
+
               </div>
             </div>
 
@@ -377,7 +381,7 @@ map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
           </div>
         </div> -->
 
-    
+
       </div>
       <!-- /.container-fluid -->
 
@@ -439,7 +443,7 @@ map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-bar-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
- 
+
 
 </body>
 

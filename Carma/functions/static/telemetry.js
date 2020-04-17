@@ -10,11 +10,13 @@ const firebaseConfig = {
     appId: '1:541695700970:web:1438c4a2ac47ea4fe4cc93',
     measurementId: 'G-08J4E1H1P2'
   };
-  
+
   // Initialize Firebase
-  
+
   firebase.initializeApp(firebaseConfig);
     // firebase.initializeApp(firebaseConfig);
+
+
     var db = firebase.database();
     var index=[];
     var totalIndex=0;
@@ -22,32 +24,56 @@ const firebaseConfig = {
     var lotList=[];
     var lat=0;
     var lon=0;
- var tripDateRef=db.ref('/Users/8mNJh20teceTE7eUcf7WtF0RwI22/TripData/Trip 04-02-2020 16:03:54'); 
-         tripDateRef.on('value',function(snap){
-           snap.forEach(function(childNodes){
-             lat=childNodes.val().lat;
-             lon=childNodes.val().lon;
-            //  latList.push(lat);
-            //  lotList.push(lot)
-          //    var i = rpm.indexOf(" ");  // Gets the first index where a space occours
-          //    vLocationList.push(); // Gets the first part
-          //    index.push(childNodes.val().index);
-          //    totalIndex+=childNodes.val().index;
-          console.log("lat " +lat);
+    var tripDateRef=db.ref('/Users/8mNJh20teceTE7eUcf7WtF0RwI22/TripData/Trip 04-02-2020 16:07:09');
 
-          console.log("lot "+lon);
-         
-           })
+    tripDateRef.on('value',function(snap){
+      snap.forEach(function(childNodes){
+        lat=childNodes.val().lat;
+        lon=childNodes.val().lon;
+        speed=childNodes.val().SPEED;
+        rpm=childNodes.val().RPM;
+         latList.push(lat);
+         lotList.push(lon);
+         // var i = rpm.indexOf(" ");  // Gets the first index where a space occours
+       // speedList.push(parseInt(speed.substr(0, i))); // Gets the first part
+     //    index.push(childNodes.val().index);
+     //    totalIndex+=childNodes.val().index;
+     console.log("lat " +lat);
 
-           console.log("lat outside " +lat);
+     console.log("lot "+lon);
+     console.log("Speed " +speed);
 
-          console.log("lot outside"+lon);
-          
-           marker.setPosition( new google.maps.LatLng( lat, lon))
-           marker.setIcon(image)
-});
+     console.log("RPM "+rpm);
 
- 
+      })
+
+      console.log("lat outside " +latList.pop());
+
+      console.log("lot outside "+lotList.pop());
+
+      console.log("Speed outside" +speed);
+
+      console.log("RPM outside "+rpm);
+
+      marker.setPosition( new google.maps.LatLng( latList.pop(), lotList.pop()))
+      marker.setIcon(image)
+
+      /// Update Speedometer
+//       1 km/h = 0.621371192 mph
+// 1 km/h = 0.539956803 knots
+// 1 mph = 1.6093440006 km/h
+// 1 mph = 0.868976242 knots
+// 1 knots = 1.852 km/h
+      updateSpeedometer(89.0 * 0.6)
+      updateSpeedometerText(89.0 * 0.6)
+     //
+     //     /// Update RPM
+      updateRPM(914.0 / 50)
+      updateRPMText(914.0)
+    });
+
+
+
 
 var current_location = {lat: 44.95, lng: -93.37};
 var current_orientation = 0
@@ -64,7 +90,6 @@ var image = {
     rotation: 0
 }
 
-var marker = new google.maps.Marker({position: current_location});
 var center_marker = new google.maps.Marker({position: {lat: 41.8781, lng: -86.623177}});
 
 var centeringInterval
@@ -84,12 +109,12 @@ var checkOfflineInterval = setInterval(() => {
     let orientation = 360 - (current_orientation * 180.0 / Math.PI) + 90
     image.rotation = orientation
 
-    marker.setIcon(image)
-    marker.setPosition( new google.maps.LatLng( current_location.lat, current_location.lng))
+    //marker.setIcon(image)
+    //marker.setPosition( new google.maps.LatLng( current_location.lat, current_location.lng))
 
-    /// Update Speedometer
-    updateSpeedometer(0)
-    updateSpeedometerText(0)
+    // /// Update Speedometer
+    // updateSpeedometer(0)
+    // updateSpeedometerText(0)
 
 
     /// Update RPM
@@ -134,6 +159,12 @@ socket.on('initData', (lastData) => {
 })
 
 
+
+
+
+
+
+
 //PLace where it gets data from backend
 // socket.on('dataToWebsite', (vehicleData) => {
 //
@@ -152,9 +183,9 @@ socket.on('initData', (lastData) => {
     //   marker.setPosition( new google.maps.LatLng( vehicleData.latitude, vehicleData.longitude))
     //   marker.setIcon(image)
 //
-//     /// Update Speedometer
-//     updateSpeedometer(vehicleData.vehicle_speed * 2.236)
-//     updateSpeedometerText(vehicleData.vehicle_speed * 2.236)
+    // /// Update Speedometer
+    // updateSpeedometer(60 * 2.236)
+    // updateSpeedometerText(60 * 2.236)
 //
 //     /// Update RPM
 //     updateRPM(vehicleData.RPM / 100)

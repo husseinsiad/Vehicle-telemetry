@@ -15,7 +15,11 @@ app.use('/static', express.static('./static/'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.get('/', function(req, res) {
-	res.render('test');
+	res.render('login');
+});
+
+app.get('/map', function(req, res) {
+	res.render('map');
 });
 
 //Error Code Page
