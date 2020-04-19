@@ -43,15 +43,9 @@ $("select.custom-select").change(function(){
 			//   let finalSumSpeed=Math.round(sumSpeed / snap.numChildren());
 			  aveSpeedList.push(Math.round(sumSpeed / snap.numChildren()));
 			  aveRpmList.push(Math.round(sumRpm / snap.numChildren()));
-			//   console.log("Number off "+snap.numChildren())
-			//   console.log("Average Speed "+aveSpeedList)
-			//   console.log("Average RPM "+aveRpmList)
 			});//end snapshot
 			 
 		}
-
-	
-		  
 		  var ctx = document.getElementById('myBarChart');
 	  var myLineChart = new Chart(ctx, {
 		  type: 'bar',

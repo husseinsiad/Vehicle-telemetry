@@ -1,5 +1,8 @@
 /* The first part of this code  uses socket io to transfer real telemerty */
 /* Parameters that  needs to be feeded to get an output are stgated below */
+// var currentUser=require('../index.js')
+// import { currentUser } from '../index.js';
+ 
 const firebaseConfig = {
     apiKey: 'AIzaSyC8ek2z-3xDI8rlaePQiOw-NDByJI8JqZ4',
     authDomain: 'se491-5f60f.firebaseapp.com',
@@ -12,69 +15,72 @@ const firebaseConfig = {
   };
 
   // Initialize Firebase
-
   firebase.initializeApp(firebaseConfig);
-    // firebase.initializeApp(firebaseConfig);
-
 
     var db = firebase.database();
-    var index=[];
-    var totalIndex=0;
+    //Get Current User
+    
+    //    var user=firebase.auth().currentUser;
+    //    console.log("curentUser "+user);
+    var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
+    var tripDateList=[];
+    tripDateRef.on("value", function(snap) {
+    snap.forEach(function(childNodes){
+        tripDateList.push(childNodes.key);
+        console.log(childNodes.key)
+    })
+
+     var tripdate=tripDateList.pop();
+
     var latList=[];
     var lotList=[];
+    var rpmList=[];
+    var speedList=[];
+    var fuelLevelList=[];
     var lat=0;
     var lon=0;
-    var tripDateRef=db.ref('/Users/8mNJh20teceTE7eUcf7WtF0RwI22/TripData/Trip 04-02-2020 16:07:09');
+    var tripRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
 
-    tripDateRef.on('value',function(snap){
+    tripRef.on('value',function(snap){
       snap.forEach(function(childNodes){
         lat=childNodes.val().lat;
         lon=childNodes.val().lon;
         speed=childNodes.val().SPEED;
         rpm=childNodes.val().RPM;
+        fuelLevel=childNodes.val().FUEL_LEVEL;
+
          latList.push(lat);
          lotList.push(lon);
-         // var i = rpm.indexOf(" ");  // Gets the first index where a space occours
-       // speedList.push(parseInt(speed.substr(0, i))); // Gets the first part
-     //    index.push(childNodes.val().index);
-     //    totalIndex+=childNodes.val().index;
-     console.log("lat " +lat);
-
-     console.log("lot "+lon);
-     console.log("Speed " +speed);
-
-     console.log("RPM "+rpm);
+         var i = rpm.indexOf(" ");  // Gets the first index where a space occours
+         rpmList.push(Math.round(parseFloat(rpm.substr(0, i))|| 0)); // Gets the first part
+         var speedIndex = speed.indexOf(" ");  // Gets the first index where a space occours
+         speedList.push(Math.round(parseFloat(speed.substr(0, speedIndex)))); // Gets the first part
+         var fuelIndex = speed.indexOf(" ");  // Gets the first index where a space occours
+         fuelLevelList.push(Math.round(parseFloat(fuelLevel.substr(0, fuelIndex)))); // Gets the first part
+      
 
       })
-
-      console.log("lat outside " +latList.pop());
-
-      console.log("lot outside "+lotList.pop());
-
-      console.log("Speed outside" +speed);
-
-      console.log("RPM outside "+rpm);
-
       marker.setPosition( new google.maps.LatLng( latList.pop(), lotList.pop()))
       marker.setIcon(image)
 
       /// Update Speedometer
-//       1 km/h = 0.621371192 mph
-// 1 km/h = 0.539956803 knots
-// 1 mph = 1.6093440006 km/h
-// 1 mph = 0.868976242 knots
-// 1 knots = 1.852 km/h
-      updateSpeedometer(89.0 * 0.6)
-      updateSpeedometerText(89.0 * 0.6)
-     //
+      var lastSpeed=speedList.pop();
+      updateSpeedometer(lastSpeed * 0.6)
+      updateSpeedometerText(lastSpeed * 0.6)
+    //   var flevel=document.getElementById("#fuellLevelProgress");
+        var fuelWidth=fuelLevelList.pop();
+       $("#fuellLevelProgress").text(fuelWidth+"%");
+      document.querySelector("#fuellLevelProgress").style.width = fuelWidth + "%";
+    //   document.querySelector(".progress-bar").style.width = fuelLevelList.pop() + "%";
      //     /// Update RPM
-      updateRPM(914.0 / 50)
-      updateRPMText(914.0)
+     var lastRpm=rpmList.pop();
+      updateRPM(lastRpm / 50)
+      updateRPMText(lastRpm)
     });
+});
 
 
-
-
+ 
 var current_location = {lat: 44.95, lng: -93.37};
 var current_orientation = 0
 var ignore = false; // this var is global;
@@ -158,51 +164,6 @@ socket.on('initData', (lastData) => {
   })
 })
 
-
-
-
-
-
-
-
-//PLace where it gets data from backend
-// socket.on('dataToWebsite', (vehicleData) => {
-//
-//     offlineCounter = 0
-//     vehicleOffline = false
-//     document.getElementById('offline').style.display = "none"
-//
-//     //Update the orientation
-//     if (vehicleData.orientation < 0) {
-//       vehicleData.orientation = vehicleData.orientation + 2 * Math.PI
-//     }
-//     let orientation = 360 - (vehicleData.orientation * 180.0 / Math.PI)
-//     image.rotation = orientation + 90
-//
-      //Update Map Position
-    //   marker.setPosition( new google.maps.LatLng( vehicleData.latitude, vehicleData.longitude))
-    //   marker.setIcon(image)
-//
-    // /// Update Speedometer
-    // updateSpeedometer(60 * 2.236)
-    // updateSpeedometerText(60 * 2.236)
-//
-//     /// Update RPM
-//     updateRPM(vehicleData.RPM / 100)
-//     updateRPMText(vehicleData.RPM / 100)
-//
-//     // Update the throttle
-//     updateBar(vehicleData.pct_throttle * 100, "bar_txtSpeeds", "myBar")
-//     var telemetry = parseFloat(vehicleData.pct_throttle * 100).toFixed(0);
-//     updateThrottleLabel(`Throttle ${telemetry}%`)
-//
-//     // Update the fuel level
-//     updateBar(vehicleData.pct_brake * 100, "gas_txtSpeeds", "brakeBar")
-//     telemetry = parseFloat(vehicleData.pct_brake * 100).toFixed(0);
-//     updateBrakeLabel(`Brakes ${telemetry}%`)
-//
-// })
-////////
 
 function centerMapOnVehicle() {
   var latLng = marker.getPosition(); // returns LatLng object

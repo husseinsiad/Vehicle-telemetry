@@ -36,7 +36,8 @@
   <script src="static/telemetry.js"></script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR4r5RijTcXQxxMoGvMy6KIIaJrjRkJ2I"></script>
-  
+ 
+ 
 
 </head>
 
@@ -139,7 +140,7 @@
           <li class="breadcrumb-item active">telemetry</li>
         </ol>
 
-        <!-- Area Chart Example-->
+       
         <div class="card mb-3">
           <div class="card-header">
             <i class="far fa-life-ring"></i>
@@ -148,8 +149,8 @@
             <!-- MAP -->
 
 
-            <div class="container">
-
+            <div>
+                
               <div class="row">
                 <div class="col-md-6"
                      style="margin-top: 10px ;margin-bottom: 10px ;padding: 10px; min-width: 330px; box-shadow: 0 0 1px grey; float: left"
@@ -333,9 +334,14 @@
                               <label id="brakeLabel"
                                      style="font-size: 12px; width:100px; margin-left: 5px; font-family:'Didact gothic', Arial, Helvetica, sans-serif; padding-top: 45px;">Fuel Level
                                   %</label>
-                              <div id="brakeProgress" style=" width: 100%" align="left">
+                                  <div class="progress">
+                                    <div id="fuellLevelProgress"class="progress-bar bg-info" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    %
+                                    </div>
+                                  </div>
+                              <!-- <div id="fuellLevelProgress" style=" width: 100%" align="left">
                                   <div id="brakeBar"></div>
-                              </div>
+                              </div> -->
                           </div>
 
 
@@ -427,6 +433,7 @@
   </form>
 
   <!-- Bootstrap core JavaScript-->
+  
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -443,8 +450,8 @@
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-bar-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
-
-
+ 
+ 
 </body>
 
 </html>

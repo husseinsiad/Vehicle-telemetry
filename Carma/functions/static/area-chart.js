@@ -16,8 +16,21 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    console.log('login in' + user);
+  } else {
+      console.log('NOT login in')
+    // No user is signed in.
+  }
+});
+
+$("#currentUser").hide();
+
  
   $('#speedCheckBox').click(function(){
+        
       if($(this).is(":checked")){
         // $("canvas").show();
         $("#rpmCheckBox").attr("disabled", true);
@@ -26,13 +39,7 @@ firebase.initializeApp(firebaseConfig);
         $("#fuelLevelCheckBox").attr("disabled", true);
         $("#engineTemCheckBox").attr("disabled", true);
         $("#engineLoadCheckBox").attr("disabled", true);
-        
-        // window.onload = function () {
-        //   var ctx = document.getElementById('myAreaChart');
-        //   var context = ctx.getContext('2d');
-        //   context.clear();
-        // }
-       
+      
         var tripdate=$("#selectTripDate").val();
       //  console.log(tripdate);
  var tripDateValue= $(this).text();
@@ -41,7 +48,9 @@ firebase.initializeApp(firebaseConfig);
      var totalIndex=0;
      var sumSpeed=0;
      var speedList=[];
-	var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
+     var currentUser=$("#currentUser").text();
+
+	var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripdate); 
           tripDateRef.on('value',function(snap){
             snap.forEach(function(childNodes){
               var speed=childNodes.val().SPEED;
@@ -52,17 +61,7 @@ firebase.initializeApp(firebaseConfig);
               totalIndex+=childNodes.val().index;
             })
             let avg = sumSpeed / snap.numChildren();
-            // console.log("sumSpeed " +sumSpeed)
-            // console.log("NumberOfChildreen " +snap.numChildren())
-            // console.log("Average " +Math.round(avg))
-            // console.log("Index" +index)
-            // console.log("speed "+speedList);
-           
               var ctx = document.getElementById('myAreaChart');
-              // var context = ctx.getContext('2d');
-            
-              // do some drawing
-              // var canvas = document.getElementById("myAreaChart");
             var myLineChart = new Chart(ctx,{
               type: 'line',
               data: {
@@ -202,7 +201,8 @@ firebase.initializeApp(firebaseConfig);
       var index=[];
       var totalIndex=0;
       var rpmList=[];
-   var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
+      var currentUser=$("#currentUser").text();
+   var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripdate); 
            tripDateRef.on('value',function(snap){
              snap.forEach(function(childNodes){
                var rpm=childNodes.val().RPM;
@@ -350,7 +350,8 @@ $('#outsideCheckBox').click(function(){
       var index=[];
       var totalIndex=0;
       var tempratureList=[];
-   var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
+      var currentUser=$("#currentUser").text();
+   var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripdate); 
            tripDateRef.on('value',function(snap){
              snap.forEach(function(childNodes){
                var temp=childNodes.val().AMBIANT_AIR_TEMP;
@@ -498,7 +499,8 @@ $('#tspCheckBox').click(function(){
         var index=[];
         var totalIndex=0;
         var Throttle_positionList=[];
-     var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
+        var currentUser=$("#currentUser").text();
+     var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripdate); 
              tripDateRef.on('value',function(snap){
                snap.forEach(function(childNodes){
                  var tps=childNodes.val().RELATIVE_THROTTLE_POS;
@@ -644,7 +646,8 @@ $('#fuelLevelCheckBox').click(function(){
       var index=[];
       var totalIndex=0;
       var fuelLevelList=[];
-   var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
+      var currentUser=$("#currentUser").text();
+   var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripdate); 
            tripDateRef.on('value',function(snap){
              snap.forEach(function(childNodes){
                var fuelLevel=childNodes.val().FUEL_LEVEL;
@@ -789,7 +792,8 @@ $('#engineTemCheckBox').click(function(){
         var index=[];
         var totalIndex=0;
         var COOLANT_TEMPList=[];
-     var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
+        var currentUser=$("#currentUser").text();
+     var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripdate); 
              tripDateRef.on('value',function(snap){
                snap.forEach(function(childNodes){
                  var coolantTemp=childNodes.val().COOLANT_TEMP;
@@ -936,7 +940,8 @@ $('#engineLoadCheckBox').click(function(){
       var index=[];
       var totalIndex=0;
       var ENGINE_LOADList=[];
-   var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
+      var currentUser=$("#currentUser").text();
+   var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripdate); 
            tripDateRef.on('value',function(snap){
              snap.forEach(function(childNodes){
                var engineLoad=childNodes.val().ENGINE_LOAD;

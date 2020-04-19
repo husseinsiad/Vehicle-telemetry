@@ -3,31 +3,23 @@ const functions = require('firebase-functions'),
 	admin = require('firebase-admin'),
 	firebase = require('firebase');
 (bodyparser = require('body-parser')),
-	// (methodoverride = require('method-override')),
 	(indexRouter = require('./routes/index'));
 var db = admin.database();
 var app = express();
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(indexRouter);
-// app.use(methodoverride('_method'));
 app.use('/static', express.static('./static/'));
-
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.get('/', function(req, res) {
 	res.render('login');
 });
-
-app.get('/map', function(req, res) {
-	res.render('map');
-});
-
+ 
 //Error Code Page
-app.get('/blank', function(req, res) {
+app.get('/blank', isAuthenticated,function(req, res) {
 	//Get Current UserID
-	// var userid = firebase.auth().currentUser.uid;
-	 
-	var userRef = db.ref('/Users/' + "CYFfFMSnffRuE9nJzbwogTza2523" + '/DTC/DTC Code');
+	var currentUser=req.user.uid;
+	var userRef = db.ref('/Users/'+currentUser+'/DTC/DTC Code');
 	userRef.on('value', function(snapshot) {
 		var data = JSON.stringify(snapshot.val);
 		var testData = snapshot.val();
@@ -38,29 +30,29 @@ app.get('/blank', function(req, res) {
 	});
 });
 
-app.get('/charts', function(req, res) {
+app.get('/charts', isAuthenticated,function(req, res) {
 	res.render('charts');
 });
-app.get('/carmd', function(req, res) {
+app.get('/carmd',isAuthenticated, function(req, res) {
 	res.render('carmd');
 });
-app.get('/telemetry', function(req, res) {
+app.get('/telemetry', isAuthenticated,function(req, res) {
+	
 	res.render('telemetry');
 });
-app.get('/tables', function(req, res) {
+app.get('/tables', isAuthenticated,function(req, res) {
 	res.render('tables');
 });
 
-//Midleware
-// function isAuthenticated(req, res, next) {
-// 	var user = firebase.auth().currentUser;
-// 	if (user !== null) {
-// 		req.user = user;
-// 		next();
-// 	} else {
-// 		//   req.flash('error',"Please Login First!!");
-// 		res.redirect('/login');
-// 	}
-// }
+// Authentication Middleware
+function isAuthenticated(req,res,next){
+    var user = firebase.auth().currentUser;
+      if (user !== null) {
+        req.user = user;
+        next();
+      } else {
+      res.redirect('/login');
+      }
+    }
 
 exports.app = functions.https.onRequest(app);
