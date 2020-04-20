@@ -15,16 +15,7 @@ const firebaseConfig = {
 // Initialize Firebase
 
 firebase.initializeApp(firebaseConfig);
-
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    console.log('login in' + user);
-  } else {
-      console.log('NOT login in')
-    // No user is signed in.
-  }
-});
+ 
 
 $("#currentUser").hide();
 

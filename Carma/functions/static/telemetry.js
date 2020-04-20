@@ -2,7 +2,7 @@
 /* Parameters that  needs to be feeded to get an output are stgated below */
 // var currentUser=require('../index.js')
 // import { currentUser } from '../index.js';
- 
+// $(document).ready(function () {
 const firebaseConfig = {
     apiKey: 'AIzaSyC8ek2z-3xDI8rlaePQiOw-NDByJI8JqZ4',
     authDomain: 'se491-5f60f.firebaseapp.com',
@@ -19,15 +19,16 @@ const firebaseConfig = {
 
     var db = firebase.database();
     //Get Current User
-    
-    //    var user=firebase.auth().currentUser;
-    //    console.log("curentUser "+user);
+    // currentUser=$("#currentUser").text();
+    // $("#fuellLevelProgress").text("%");
+    // var currentUser = document.getElementById("#currentUser");
+    // console.log("kk" + currentUser);
     var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
     var tripDateList=[];
     tripDateRef.on("value", function(snap) {
     snap.forEach(function(childNodes){
         tripDateList.push(childNodes.key);
-        console.log(childNodes.key)
+        // console.log(childNodes.key)
     })
 
      var tripdate=tripDateList.pop();
@@ -37,6 +38,7 @@ const firebaseConfig = {
     var rpmList=[];
     var speedList=[];
     var fuelLevelList=[];
+    var relativePosList=[];
     var lat=0;
     var lon=0;
     var tripRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripdate); 
@@ -48,6 +50,7 @@ const firebaseConfig = {
         speed=childNodes.val().SPEED;
         rpm=childNodes.val().RPM;
         fuelLevel=childNodes.val().FUEL_LEVEL;
+        relativePoss=childNodes.val().RELATIVE_THROTTLE_POS;
 
          latList.push(lat);
          lotList.push(lon);
@@ -57,7 +60,8 @@ const firebaseConfig = {
          speedList.push(Math.round(parseFloat(speed.substr(0, speedIndex)))); // Gets the first part
          var fuelIndex = speed.indexOf(" ");  // Gets the first index where a space occours
          fuelLevelList.push(Math.round(parseFloat(fuelLevel.substr(0, fuelIndex)))); // Gets the first part
-      
+         var relativeIndex = relativePoss.indexOf(" ");  // Gets the first index where a space occours
+         relativePosList.push(Math.round(parseFloat(relativePoss.substr(0, relativeIndex)))); // Gets the first part
 
       })
       marker.setPosition( new google.maps.LatLng( latList.pop(), lotList.pop()))
@@ -69,8 +73,11 @@ const firebaseConfig = {
       updateSpeedometerText(lastSpeed * 0.6)
     //   var flevel=document.getElementById("#fuellLevelProgress");
         var fuelWidth=fuelLevelList.pop();
+        var relativeWidth=relativePosList.pop();
        $("#fuellLevelProgress").text(fuelWidth+"%");
       document.querySelector("#fuellLevelProgress").style.width = fuelWidth + "%";
+      $("#relativePossProgress").text(relativeWidth+"%");
+      document.querySelector("#relativePossProgress").style.width = relativeWidth + "%";
     //   document.querySelector(".progress-bar").style.width = fuelLevelList.pop() + "%";
      //     /// Update RPM
      var lastRpm=rpmList.pop();
@@ -183,12 +190,12 @@ function stopCentering() {
 
 function updateSpeedometerText(value) {
   var telemetry = parseFloat(value).toFixed(0);
-  document.getElementById("speedometerTele").innerHTML = `Vehicle Speed ${telemetry} mph`;
+  document.getElementById("speedometerTele").innerHTML = `Speed ${telemetry} mph`;
 }
 
 function updateRPMText(value) {
   var telemetry = parseFloat(value).toFixed(0);
-  document.getElementById("RPMTele").innerHTML = `Vehicle RPM ${telemetry} rpm`;
+  document.getElementById("RPMTele").innerHTML = `RPM ${telemetry} rpm`;
 }
 
 
@@ -829,3 +836,5 @@ function updateRPM(newValue) {
 
     }
 }
+
+// }); //Pae load end

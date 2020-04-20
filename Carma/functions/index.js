@@ -30,15 +30,13 @@ app.get('/blank', isAuthenticated,function(req, res) {
 	});
 });
 
-app.get('/charts', isAuthenticated,function(req, res) {
-	res.render('charts');
-});
+ 
 app.get('/carmd',isAuthenticated, function(req, res) {
 	res.render('carmd');
 });
 app.get('/telemetry', isAuthenticated,function(req, res) {
-	
-	res.render('telemetry');
+	var currentUser=req.user.uid;
+	res.render('telemetry',{currentUser:currentUser});
 });
 app.get('/tables', isAuthenticated,function(req, res) {
 	res.render('tables');
