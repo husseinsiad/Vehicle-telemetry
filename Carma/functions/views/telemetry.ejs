@@ -145,7 +145,7 @@
         <div class="card mb-3">
           <div class="card-header">
             <i class="far fa-life-ring"></i>
-            Live Telmetry Data</div>
+            Live Telemetry Data</div>
           <div class="card-body">
             <!-- MAP -->
 
@@ -328,12 +328,12 @@ function stopCentering() {
 
 function updateSpeedometerText(value) {
   var telemetry = parseFloat(value).toFixed(0);
-  document.getElementById("speedometerTele").innerHTML = `Speed ${telemetry} mph`;
+  document.getElementById("speedometerTele").innerHTML = `${telemetry} MPH`;
 }
 
 function updateRPMText(value) {
   var telemetry = parseFloat(value).toFixed(0);
-  document.getElementById("RPMTele").innerHTML = `RPM ${telemetry} rpm`;
+  document.getElementById("RPMTele").innerHTML = `${telemetry} RPM`;
 }
 
 
@@ -1044,8 +1044,8 @@ function updateRPM(newValue) {
                                 </canvas>
                                 <div id='dbar2' style=" margin-top: 10px; margin-left: 40px; " align="center">
                                     <label id="speedometerTele" style="font-size: 16px; font-family:'Didact gothic', Arial, Helvetica, sans-serif; ">
-                                        Speed
-                                        mph</label>
+                                        
+                                        MPH</label>
 
                                 </div>
                                 <script>
@@ -1074,8 +1074,8 @@ function updateRPM(newValue) {
                             </canvas>
                             <div id='dbar3' style=" margin-top: 10px; margin-left: 40px; " align="center">
                                 <label id="RPMTele" style="font-size: 16px; font-family:'Didact gothic', Arial, Helvetica, sans-serif; ">
-                                    RPM
-                                    rpm</label>
+                                    
+                                  RPM</label>
 
                             </div>
                             <script>
@@ -1097,11 +1097,11 @@ function updateRPM(newValue) {
 
                           <div class="col-md-12 box " style="padding-top: 0px; width: 100%; padding: 0px 30px; margin-left:50px" align="center">
                               <label id="throttleLabel"
-                                     style="font-size: 16px; width:120px; font-family:'Didact gothic', Arial, Helvetica, sans-serif;padding-top: 15px ;margin-left: 10px;">Relative Throttle position
-                                  %</label>
+                                     style="font-size: 16px; width:120px; font-family:'Didact gothic', Arial, Helvetica, sans-serif;padding-top: 15px ;margin-left: 10px;">Throttle Position
+                                  </label>
                                   <div class="progress" style="height: 20px;width: 170px;">
-                                    <div id="relativePossProgress"class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                    %
+                                    <div id="relativePossProgress"class="progress-bar bg-info progress-bar-striped text-dark" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    
                                     </div>
                                   </div>
                           </div>
@@ -1113,9 +1113,9 @@ function updateRPM(newValue) {
                           <div class="col-md-12 box " style="padding-top: 15px; padding: 0px 30px; margin-left:50px" align="center">
                               <label id="brakeLabel"
                                      style="font-size: 16px; width:100px; margin-left: 5px; font-family:'Didact gothic', Arial, Helvetica, sans-serif; padding-top: 45px;">Fuel Level
-                                  %</label>
+                                  </label>
                                   <div class="progress" style="height: 20px; width: 170px;">
-                                    <div id="fuellLevelProgress"class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div id="fuellLevelProgress"class="progress-bar bg-info progress-bar-striped text-dark" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                     %
                                     </div>
                                   </div>

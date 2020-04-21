@@ -11,9 +11,10 @@ $(document).ready(function() {
 $("select.custom-select").change(function(){
 	var option = $(this).children("option:selected").val();
 	if(option=="Speed"){
+		var currentUser=$("#currentUser").text();
 
 		var db = firebase.database();
-	var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
+	var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData');
 		var tripDateList=[];
 		var sumSpeed=0;
 	tripDateRef.on("value", function(snap) {

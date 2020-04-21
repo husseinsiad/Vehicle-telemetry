@@ -190,12 +190,12 @@ function stopCentering() {
 
 function updateSpeedometerText(value) {
   var telemetry = parseFloat(value).toFixed(0);
-  document.getElementById("speedometerTele").innerHTML = `Speed ${telemetry} mph`;
+  document.getElementById("speedometerTele").innerHTML = `${telemetry} MPH`;
 }
 
 function updateRPMText(value) {
   var telemetry = parseFloat(value).toFixed(0);
-  document.getElementById("RPMTele").innerHTML = `RPM ${telemetry} rpm`;
+  document.getElementById("RPMTele").innerHTML = `${telemetry} RPM`;
 }
 
 
