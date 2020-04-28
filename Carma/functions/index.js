@@ -38,8 +38,17 @@ app.get('/telemetry', isAuthenticated,function(req, res) {
 	var currentUser=req.user.uid;
 	res.render('telemetry',{currentUser:currentUser});
 });
-app.get('/tables', isAuthenticated,function(req, res) {
-	res.render('tables');
+app.get('/heatmap', isAuthenticated,function(req, res) {
+	var currentUser=req.user.uid;
+	var tripDateRef=db.ref('/Users/'+currentUser+'/TripData');
+		var childKey=[];
+	tripDateRef.on("value", function(snap) {
+		snap.forEach(function(childNodes){
+			childKey.push(childNodes.key);
+		})
+     	res.render('heatmap',{tripData:childKey.pop(),currentUser:currentUser});
+	})
+	// res.render('heatmap',{ currentUser:currentUser});
 });
 
 // Authentication Middleware

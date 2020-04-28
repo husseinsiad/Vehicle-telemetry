@@ -51,7 +51,8 @@ router.get('/index', isAuthenticated,function(req, res) {
 		snap.forEach(function(childNodes){
 			childKey.push(childNodes.key);
 		})
-     	res.render('index',{tripData:childKey,currentUser:currentUser});
+	// childKey.slice(Math.max(childKey.length - 5, 0));
+     	res.render('index',{tripData:childKey.slice(Math.max(childKey.length - 5, 0)),currentUser:currentUser});
 	})
 	
 });

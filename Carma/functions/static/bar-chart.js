@@ -16,6 +16,7 @@ $("select.custom-select").change(function(){
 		var db = firebase.database();
 	var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData');
 		var tripDateList=[];
+	 
 		var sumSpeed=0;
 	tripDateRef.on("value", function(snap) {
 		snap.forEach(function(childNodes){
@@ -28,22 +29,23 @@ $("select.custom-select").change(function(){
 		for(var i=0;i<tripDateList.length;i++){
 			var sumSpeed=0;
 		    var sumRpm=0;
-			var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripDateList[i]); 
+			var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripDateList[i]); 
 			tripDateRef.on('value',function(snap){
 				//Inner loop calculating average
 			  snap.forEach(function(childNodes){
 				var speed=childNodes.val().SPEED;
-				var rpm=childNodes.val().RPM;
-				var i = speed.indexOf(" ");  // Gets the first index where a space occours
-				var i = rpm.indexOf(" ");  // Gets the first index where a space occours
+				// var rpm=childNodes.val().RPM;
+				// var i = speed.indexOf(" "); 
+				var i = speed.indexOf(" "); // Gets the first index where a space occours
+				// var rpmIndex = rpm.indexOf(" ");  // Gets the first index where a space occours
 				sumSpeed = sumSpeed + parseInt(speed.substr(0, i)) || 0;
 				// console.log("Speed " +speed +" "+ childNodes.key);
-				sumRpm = sumRpm + parseInt(rpm.substr(0, i));
+				// sumRpm = sumRpm + parseInt(rpm.substr(0, rpmIndex));
 				// console.log("RPM " +rpm +" "+ childNodes.key);
 			  })
 			//   let finalSumSpeed=Math.round(sumSpeed / snap.numChildren());
 			  aveSpeedList.push(Math.round(sumSpeed / snap.numChildren()));
-			  aveRpmList.push(Math.round(sumRpm / snap.numChildren()));
+			//   aveRpmList.push(Math.round(sumRpm / snap.numChildren()));
 			});//end snapshot
 			 
 		}
@@ -51,7 +53,7 @@ $("select.custom-select").change(function(){
 	  var myLineChart = new Chart(ctx, {
 		  type: 'bar',
 		  data: {
-			  labels: tripDateList,
+			  labels: tripDateList.slice(Math.max(tripDateList.length - 5, 0)),
 			  datasets: [
 				  {
 					  label: 'Total:',
@@ -103,9 +105,9 @@ $("select.custom-select").change(function(){
 	 
 	}
 	else if(option=="RPM"){
-		
+		var currentUser=$("#currentUser").text();
 	var db = firebase.database();
-	var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData');
+	var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData');
 		var tripDateList=[];
 		var sumSpeed=0;
 	tripDateRef.on("value", function(snap) {
@@ -118,15 +120,16 @@ $("select.custom-select").change(function(){
 		
 		for(var i=0;i<tripDateList.length;i++){
 			// var sumSpeed=0;
-		    var sumRpm=0;
-			var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripDateList[i]); 
+			var sumRpm=0;
+			var tripDateRef=db.ref('/Users/'+currentUser.trim()+'/TripData/'+tripDateList[i]);
+			// var tripDateRef=db.ref('/Users/CYFfFMSnffRuE9nJzbwogTza2523/TripData/'+tripDateList[i]); 
 			tripDateRef.on('value',function(snap){
 				//Inner loop calculating average
 			  snap.forEach(function(childNodes){
 				// var speed=childNodes.val().SPEED;
 				var rpm=childNodes.val().RPM;
 				// var i = speed.indexOf(" ");  // Gets the first index where a space occours
-				var i = rpm.indexOf(" ");  // Gets the first index where a space occours
+				var i = rpm.indexOf(" "); // Gets the first index where a space occours
 				// sumSpeed = sumSpeed + parseInt(speed.substr(0, i)) || 0;
 				// console.log("Speed " +speed +" "+ childNodes.key);
 				sumRpm = sumRpm + parseInt(rpm.substr(0, i)) || 0;
