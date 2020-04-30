@@ -47,13 +47,14 @@ router.get('/index', isAuthenticated,function(req, res) {
 	console.log("CurentUser " +currentUser);
 	var tripDateRef=db.ref('/Users/'+currentUser+'/TripData');
 		var childKey=[];
-	tripDateRef.on("value", function(snap) {
+	tripDateRef.once("value", function(snap) {
 		snap.forEach(function(childNodes){
 			childKey.push(childNodes.key);
 		})
 	// childKey.slice(Math.max(childKey.length - 5, 0));
-     	res.render('index',{tripData:childKey.slice(Math.max(childKey.length - 5, 0)),currentUser:currentUser});
+     	res.render('index',{tripData:childKey,currentUser:currentUser});
 	})
+	 
 	
 });
  
@@ -74,7 +75,7 @@ router.post('/login', function(req, res) {
 			//Get Current UserID
 			var userid = firebase.auth().currentUser.uid;
 			var userRef = db.ref('/Users/' + userid);
-			userRef.on('value', function(snapshot) {
+			userRef.once('value', function(snapshot) {
 				var userData = snapshot.val();
 				res.redirect('/index');
 			});
