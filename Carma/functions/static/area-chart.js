@@ -47,17 +47,32 @@ $("#currentUser").hide();
               var speed=childNodes.val().SPEED;
               var i = speed.indexOf(" ");  // Gets the first index where a space occours
               speedList.push(parseInt(speed.substr(0, i))); // Gets the first part
-              index.push(childNodes.val().index);
+              // index.push(childNodes.val().index);
+              var min = childNodes.val().index/60
+              min = Math.trunc(min);
+              var sec = childNodes.val().index%60;
+            if(sec < 10){
+              var minSecLabel = min + ":0" + sec;
+              index.push(minSecLabel);
+
+            }else{
+              var minSecLabel = min + ":" + sec;
+              index.push(minSecLabel);
+            }
+             
               sumSpeed = sumSpeed + parseInt(speed.substr(0, i));
               totalIndex+=childNodes.val().index;
             })
+
+            
+
             let avg = sumSpeed / snap.numChildren();
               var ctx = document.getElementById('myAreaChart');
             var myLineChart = new Chart(ctx,{
               type: 'line',
               data: {
                 labels: index,
-                // labels: [1, 2, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
+                // labels: ["1:00", "2:00", int 1, int 2, int 3, 3, 4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14,15, 16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26],
                 datasets: [{
                   label: "Speed",
                   // lineTension: 0.3,
@@ -198,8 +213,19 @@ $("#currentUser").hide();
              snap.forEach(function(childNodes){
                var rpm=childNodes.val().RPM;
                var i = rpm.indexOf(" ");  // Gets the first index where a space occours
-               rpmList.push(Math.round(parseFloat(rpm.substr(0, i)))); // Gets the first part
-               index.push(childNodes.val().index);
+                rpmList.push(Math.round(parseFloat(rpm.substr(0, i)))); // Gets the first part
+              //  index.push(childNodes.val().index);
+              var min = childNodes.val().index/60
+              min = Math.trunc(min);
+              var sec = childNodes.val().index%60;
+            if(sec < 10){
+              var minSecLabel = min + ":0" + sec;
+              index.push(minSecLabel);
+
+            }else{
+              var minSecLabel = min + ":" + sec;
+              index.push(minSecLabel);
+            }
                totalIndex+=childNodes.val().index;
              })
             //  console.log("Index" +index)
@@ -348,7 +374,17 @@ $('#outsideCheckBox').click(function(){
                var temp=childNodes.val().AMBIANT_AIR_TEMP;
                var i = temp.indexOf(" ");  // Gets the first index where a space occours
                tempratureList.push(parseFloat(temp.substr(0, i))).toFixed(2); // Gets the first part
-               index.push(childNodes.val().index);
+               var min = childNodes.val().index/60
+               min = Math.trunc(min);
+               var sec = childNodes.val().index%60;
+             if(sec < 10){
+               var minSecLabel = min + ":0" + sec;
+               index.push(minSecLabel);
+ 
+             }else{
+               var minSecLabel = min + ":" + sec;
+               index.push(minSecLabel);
+             }
                totalIndex+=childNodes.val().index;
              })
             //  console.log("Index" +index)
@@ -497,7 +533,17 @@ $('#tspCheckBox').click(function(){
                  var tps=childNodes.val().RELATIVE_THROTTLE_POS;
                  var i = tps.indexOf(" ");  // Gets the first index where a space occours
                  Throttle_positionList.push(Math.round(parseFloat(tps.substr(0, i)))); // Gets the first part
-                 index.push(childNodes.val().index);
+                 var min = childNodes.val().index/60
+                 min = Math.trunc(min);
+                 var sec = childNodes.val().index%60;
+               if(sec < 10){
+                 var minSecLabel = min + ":0" + sec;
+                 index.push(minSecLabel);
+   
+               }else{
+                 var minSecLabel = min + ":" + sec;
+                 index.push(minSecLabel);
+               }
                  totalIndex+=childNodes.val().index;
                })
               //  console.log("Index" +index)
@@ -644,7 +690,17 @@ $('#fuelLevelCheckBox').click(function(){
                var fuelLevel=childNodes.val().FUEL_LEVEL;
                var i = fuelLevel.indexOf(" ");  // Gets the first index where a space occours
                fuelLevelList.push(Math.round(parseFloat(fuelLevel.substr(0, i)))); // Gets the first part
-               index.push(childNodes.val().index);
+               var min = childNodes.val().index/60
+               min = Math.trunc(min);
+               var sec = childNodes.val().index%60;
+             if(sec < 10){
+               var minSecLabel = min + ":0" + sec;
+               index.push(minSecLabel);
+ 
+             }else{
+               var minSecLabel = min + ":" + sec;
+               index.push(minSecLabel);
+             }
                totalIndex+=childNodes.val().index;
              })
             //  console.log("Index" +index)
@@ -790,7 +846,17 @@ $('#engineTemCheckBox').click(function(){
                  var coolantTemp=childNodes.val().COOLANT_TEMP;
                  var i = coolantTemp.indexOf(" ");  // Gets the first index where a space occours
                  COOLANT_TEMPList.push(parseInt(coolantTemp.substr(0, i))); // Gets the first part
-                 index.push(childNodes.val().index);
+                 var min = childNodes.val().index/60
+                 min = Math.trunc(min);
+                 var sec = childNodes.val().index%60;
+               if(sec < 10){
+                 var minSecLabel = min + ":0" + sec;
+                 index.push(minSecLabel);
+   
+               }else{
+                 var minSecLabel = min + ":" + sec;
+                 index.push(minSecLabel);
+               }
                  totalIndex+=childNodes.val().index;
                })
               //  console.log("Index" +index)
@@ -938,7 +1004,17 @@ $('#engineLoadCheckBox').click(function(){
                var engineLoad=childNodes.val().ENGINE_LOAD;
                var i = engineLoad.indexOf(" ");  // Gets the first index where a space occours
                ENGINE_LOADList.push(Math.round(parseFloat(engineLoad.substr(0, i)))); // Gets the first part
-               index.push(childNodes.val().index);
+               var min = childNodes.val().index/60
+              min = Math.trunc(min);
+              var sec = childNodes.val().index%60;
+            if(sec < 10){
+              var minSecLabel = min + ":0" + sec;
+              index.push(minSecLabel);
+
+            }else{
+              var minSecLabel = min + ":" + sec;
+              index.push(minSecLabel);
+            }
                totalIndex+=childNodes.val().index;
              })
             //  console.log("Index" +index)
